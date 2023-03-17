@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        div{
+            float: left;
+            width: 20%;
+            height: 300px;
+            margin: 20px;
+            line-height: 30px;
+        }
+    </style>
+    <title>구구단</title>
+</head>
+<body>
+    <h1>스크립트로 구구단 만들기</h1>
+
+    <script>
+        var i,j;
+        
+        for(i=2; i<10; i++){
+            document.write("<div>");
+            document.write("<h3>" + i + "단</h3>");
+            for(j=1; j<10; j++){
+                document.write(i + " x " + j + " =" + i*j);
+                document.write("<br>");
+            }
+            document.write("</div>");
+        }
+    </script>
+</body>
+</html>
