@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="exam04.css">
+    <title>flex 공부</title>
+</head>
+<body class="container">
+
+    <div id="start-flex">
+        <h2>start-flex</h1>
+
+        just flex
+        <div class="container1">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        inline-flex
+        <br>
+        <div class="container2">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+    </div>
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    <div id="flex-direction" style="margin-left: 20px;">
+        <h2 style="border: 0;">flex-direction</h2>
+
+        row
+        <div class="row">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        column
+        <br>
+        <div class="column">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        row-reverse
+        <br>
+        <div class="row-reverse">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        column-reverse
+        <br>
+        <div class="column-reverse">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+    </div>
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    <div id="flex-wrap" style="margin-left: 20px;">
+        <h2 style="border: 0;">flex-wrap</h2>
+        
+        nowrap(기본값)
+        <div class="nowrap">
+            <div class="item">box1 box1 box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        wrap
+        <br>
+        <div class="wrap">
+            <div class="item">box1 box1 box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        wrap-reverse
+        <br>
+        <div class="wrap-reverse">
+            <div class="item">box1 box1 box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+        flex-flow를 사용시 direction과 wrap을 동시에 선언이 가능하다. <br>
+        ex)flex-flow: row wrap;
+    </div>
+
+<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    <div id="justify-content" style="margin-left: 20px;">
+        <h2 style="border: 0;">justify-content</h2>
+
+        flex-start(기본값)
+        <div class="flex-start">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        flex-end
+        <div class="flex-end">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+    </div>
+</body>
+</html>
