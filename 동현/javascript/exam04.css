@@ -1,0 +1,70 @@
+.container{
+    display: flex;
+    border: 1px solid black;
+}
+.item{
+    background-color: green;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+
+/* start-felx  파트 css */
+#start-flex  .container1{
+    border: 1px solid black;
+    display: flex;
+}
+#start-flex  .container2{
+    border: 1px solid black;
+    display: inline-flex;
+}
+
+/* flex-direction 파트 css */
+
+#flex-direction > *{
+    border: 1px solid black;
+}
+
+#flex-direction .row{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+#flex-direction .column{
+    display: flex;
+    flex-direction: column;
+}
+#flex-direction .row-reverse{
+    display: flex;
+    flex-direction: row-reverse;
+}
+#flex-direction .column-reverse{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+/* flex-wrap css 파트  */
+#flex-wrap > *{
+    border: 1px solid black;
+}
+
+#flex-wrap{
+    width: 120px;
+}
+#flex-wrap .nowrap{
+    display: flex;
+    flex-wrap: nowrap;
+}
+#flex-wrap .wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+#flex-wrap .wrap-reverse{
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+
+/* justify-content 파트 css */
+#justify-content .flex-start{
+    display: flex;
+    justify-content: flex-start;
+}
