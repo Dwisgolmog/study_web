@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Diary.css">
+    <title>January</title>
+<style>
+*{
+    background-color: rgb(56, 85, 85);
+}
+.grid-container{
+    display:grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(7, minmax(100px, auto));
+    align-items: stretch;
+    gap: 10px 10px;
+}
+.item{
+    display:grid;
+    background-color: pink;
+    border: 2px solid black;
+    font-size: 30px;
+    color: aliceblue; 
+}
+
+.grid-item{
+    display:grid;
+    background-color: rgb(243, 243, 113);
+    border: 2px solid black;
+}
+</style>
+</head>
+<body>
+    <div class="flex-container">
+        <nav>
+            <ul>
+                <li><a href="#">January</a></li>
+                <li><a href="#">February</a></li>
+                <li><a href="#">March</a></li>
+                <li><a href="#">April</a></li>
+                <li><a href="#">May</a></li>
+                <li><a href="#">June</a></li>
+                <li><a href="#">July</a></li>
+                <li><a href="#">August</a></li>
+                <li><a href="#">September</a></li>
+                <li><a href="#">October</a></li>
+                <li><a href="#">November</a></li>
+                <li><a href="#">December</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="grid-container">
+        <div class="item">일</div>
+        <div class="item">월</div>
+        <div class="item">화</div>    
+        <div class="item">수</div>
+        <div class="item">목</div>
+        <div class="item">금</div>
+        <div class="item">토</div>
+        <!--요일-->
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+        <div class="grid-item">9</div>
+        <div class="grid-item">10</div>
+        <div class="grid-item">11</div>
+        <div class="grid-item">12</div>
+        <div class="grid-item">13</div>
+        <div class="grid-item">14</div>
+        <div class="grid-item">15</div>
+        <div class="grid-item">16</div>
+        <div class="grid-item">17</div>
+        <div class="grid-item">18</div>
+        <div class="grid-item">19</div>
+        <div class="grid-item">20</div>
+        <div class="grid-item">21</div>
+        <div class="grid-item">22</div>
+        <div class="grid-item">23</div>
+        <div class="grid-item">24</div>
+        <div class="grid-item">25</div>
+        <div class="grid-item">26</div>
+        <div class="grid-item">27</div>
+        <div class="grid-item">28</div>
+        <div class="grid-item">29</div>
+        <div class="grid-item">30</div>
+        <div class="grid-item">31</div>
+    </div>
+</body>
+</html>
