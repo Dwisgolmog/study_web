@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex</title>
+    <style>
+        *{
+            background-color: pink;
+        }
+        .flex-container{
+            
+            display: flex;
+            flex-direction: column;
+            
+        }
+        
+        nav {
+            display: flex;
+            margin: auto;
+            justify-content: center;
+            width: 80%;
+            height: 80px;
+            align-items: center;
+        }
+        nav li {
+            line-height: 80px;
+            display: inline-block;
+            margin: 0 8px;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+            padding: 10px;
+        }
+        a.active,
+        a:hover {
+            
+            color:black;
+        }
+        .flex-item_middle{
+            text-align: center;
+            width: 100%;
+            height: 800px;
+            justify-content: center;
+            background-color: aliceblue;
+            border: 1px solid skyblue;
+            align-self: center;
+        }
+        .flex-item_bottom{
+            text-align: center;
+            width: 100%;
+            height:200px;
+            justify-content: center;
+            background-color: aliceblue;
+            border: 1px solid skyblue;
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-container">
+        
+        
+            <nav>
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">FIRST</a></li>
+                    <li><a href="#">SECOND</a></li>
+                    <li><a href="#">THREE</a></li>
+                    <li><a href="#">FOUR</a></li>
+                </ul>
+            </nav>
+            
+        <div class="flex-item_middle">middle</div>
+        <div class="flex-item_bottom">bottom</div>
+
+    </div>
+</body>
+</html>
