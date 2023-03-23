@@ -1,14 +1,24 @@
 .container{
     display: flex;
     border: 1px solid black;
+    justify-content: center;
+    flex-flow: wrap;
+}
+.container > div{
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 .item{
     background-color: green;
-    margin-right: 5px;
     border: 1px solid black;
 }
 
 /* start-felx  파트 css */
+#start-flex{
+    width: 110px;
+}
 #start-flex  .container1{
     border: 1px solid black;
     display: flex;
@@ -52,7 +62,6 @@
 }
 #flex-wrap .nowrap{
     display: flex;
-    flex-wrap: nowrap;
 }
 #flex-wrap .wrap{
     display: flex;
@@ -93,7 +102,7 @@
 }
 
 /* align-items css 파트 */
-#align-items > *{
+#align-items > div[class]{
     border: 1px solid black;
     height: 40px;
 }
@@ -120,6 +129,7 @@
 }
 .baseline > *{
     background-color: green;
+    border: 1px solid black;
 }
 .baseline .item3{
     font-size: 20px;
@@ -129,4 +139,46 @@
 }
 .baseline .item1{
     font-size: 5px;
+}
+
+/* align-content css 파트 */
+#align-content > div[class]{
+    border: 1px solid black;
+    height: 60px;
+    width: 140px;
+    display: flex;
+    flex-flow: wrap;
+}
+#align-content .stretch{
+    align-content: stretch;
+}
+#align-content .flex-start{
+    align-content: flex-start;
+}
+#align-content .flex-end{
+    align-content: flex-end;
+}
+#align-content .center{
+    align-content: center;
+}
+#align-content .space-between{
+    align-content: space-between;
+}
+#align-content .space-around{
+    align-content: space-around;
+}
+#align-content .space-evenly{
+    align-content: space-evenly;
+}
+
+/* flex-basis css 파트 */
+#basis_grow > div[class]{
+    border: 1px solid black;
+    display: flex;
+}
+.flex-basis-auto .item{
+    flex-basis: auto;
+}
+.flex-basis .item{
+    flex-basis: 70px;
 }
