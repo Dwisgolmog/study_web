@@ -29,10 +29,10 @@
     </div>
 
 <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-    <div id="flex-direction" style="margin-left: 20px;">
+    <div id="flex-direction">
         <h2 style="border: 0;">flex-direction</h2>
 
-        row
+        row(기본값)
         <div class="row">
             <div class="item">box1</div>
             <div class="item">box2</div>
@@ -65,37 +65,38 @@
     </div>
 
 <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-    <div id="flex-wrap" style="margin-left: 20px;">
+    <div id="flex-wrap">
         <h2 style="border: 0;">flex-wrap</h2>
         
         nowrap(기본값)
         <div class="nowrap">
-            <div class="item">box1 box1 box1</div>
+            <div class="item">box1</div>
             <div class="item">box2</div>
-            <div class="item">box3</div>
+            <div class="item">box3box3 box3</div>
         </div>
 
         wrap
         <br>
         <div class="wrap">
-            <div class="item">box1 box1 box1</div>
+            <div class="item">box1</div>
             <div class="item">box2</div>
-            <div class="item">box3</div>
+            <div class="item">box3box3 box3</div>
         </div>
 
         wrap-reverse
         <br>
         <div class="wrap-reverse">
-            <div class="item">box1 box1 box1</div>
+            <div class="item">box1</div>
             <div class="item">box2</div>
-            <div class="item">box3</div>
+            <div class="item">box3box3 box3</div>
         </div>
+        <br>
         flex-flow를 사용시 direction과 wrap을 동시에 선언이 가능하다. <br>
         ex)flex-flow: row wrap;
     </div>
 
 <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
-    <div id="justify-content" style="margin-left: 20px;">
+    <div id="justify-content">
         <h2 style="border: 0;">justify-content</h2>
 
         flex-start(기본값)
@@ -112,6 +113,146 @@
             <div class="item">box3</div>
         </div>
 
+        center
+        <div class="center">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        space-between
+        <div class="space-between">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        space-around
+        <div class="space-around">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        space-evenly <br> (ms계열 브라우저 지원x)
+        <div class="space-evenly">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+    </div>
+
+    <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    <div id="align-items">
+        <h2 style="border: 0;">align-items</h2>
+
+        stretch(기본값)
+        <div class="stretch">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        flex-start
+        <div class="flex-start">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        flex-end
+        <div class="flex-end">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        center
+        <div class="center">
+            <div class="item">box1</div>
+            <div class="item">box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        baseline
+        <div class="baseline">
+            <div class="item1">box1</div>
+            <div class="item2">box2</div>
+            <div class="item3">box3</div>
+        </div>
+    </div>
+
+    <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    <div id="align-content">
+        <h2>align-content</h2>
+
+        stretch(기본값)
+        <div class="stretch">
+            <div class="item">box1</div>    
+            <div class="item">box2box2box2</div>
+            <div class="item">box3box3</div>    
+        </div>
+
+        flex-start
+        <div class="flex-start">
+            <div class="item">box1</div>    
+            <div class="item">box2box2box2</div>
+            <div class="item">box3box3</div>    
+        </div>
+
+        flex-end
+        <div class="flex-end">
+            <div class="item">box1</div>    
+            <div class="item">box2box2box2</div>
+            <div class="item">box3box3</div>    
+        </div>
+
+        center
+        <div class="center">
+            <div class="item">box1</div>    
+            <div class="item">box2box2box2</div>
+            <div class="item">box3box3</div>    
+        </div>
+
+        space-between
+        <div class="space-between">
+            <div class="item">box1</div>    
+            <div class="item">box2box2box2</div>
+            <div class="item">box3box3</div>    
+        </div>
+
+        space-around
+        <div class="space-around">
+            <div class="item">box1</div>    
+            <div class="item">box2box2box2</div>
+            <div class="item">box3box3</div>    
+        </div>
+
+        space-evenly<br>(ms계열 브라우저 지원x)
+        <div class="space-evenly">
+            <div class="item">box1</div>    
+            <div class="item">box2box2box2</div>
+            <div class="item">box3box3</div>    
+        </div>
+    </div>
+
+    <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+    <div id="basis_grow">
+        <h2>flex-basis & flex-grow</h2>
+
+        flex-basis: auto(기본값)
+        <div class="flex-basis-auto">
+            <div class="item">box1</div>
+            <div class="item">box2box2</div>
+            <div class="item">box3</div>
+        </div>
+
+        flex-basis: 70px
+        <div class="flex-basis">
+            <div class="item">box1</div>
+            <div class="item">box2box2</div>
+            <div class="item">box3</div>
+        </div>
     </div>
 </body>
 </html>
