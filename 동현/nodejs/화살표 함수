@@ -1,0 +1,28 @@
+function add1(x,y){
+    return x + y;
+}
+
+const add2 = (x,y) =>{
+    return x + y;
+}
+
+const add3 = (x,y) => x + y;
+
+const add4 = (x,y) => (x + y);
+//같은 기능을 하면서 다른형태로 표현
+
+
+function not1(x){
+    return !x;
+}
+
+const not2 = x => !x;
+//같은 기능을 하면서 다른형태로 표현
+
+const relationshiop = {
+    name: 'zero',
+    friends:['nero','hero','xero'],
+    logFriends(){
+        this.friends.forEach(friend => console.log(friend)); //forEach 또한 function을 없에고 화살표 사용
+    }
+}

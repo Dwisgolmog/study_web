@@ -1,0 +1,7 @@
+ const num1 = 1;
+ const num2 = 2;
+ const result = 3;
+ const string = `${num3} 더하기 ${num4}는 '${result}'`;
+ console.log(string);//1 더하기 2는 '3'
+
+ //백틱을 사용하여 문자열 안에 변수를 넣을수 있다!

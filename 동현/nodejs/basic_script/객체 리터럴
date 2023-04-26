@@ -1,0 +1,29 @@
+var sayNode = function(){
+    console.log('Node');
+};
+var es = "ES";
+
+var oldObject = {
+    value : 3, // 일반적인 프로퍼티 선언
+    sayNode: sayNode, //위에서 선언된 sayNode 변수를 value로 지정
+    sayJs:function(){ //함수를 프로퍼티로 지정 => 메서드
+        console.log('JS');
+    },
+}
+oldObject[es+6] = 'Fantastic'; //프로퍼티를 동적 생성
+oldObject.sayNode;//Node
+oldObject.sayJs;//JS
+console.log(oldObject.ES6);//Fantastic
+
+// -----------------------------------------------------------
+
+const newObject = {
+    sayNode, //속성명과 변수명이 동일한 경우에는 한번만 사용해도 됨
+    sayJs(){ //function() 및 : 생략
+        console.log('JS');
+    },
+    [es+6]:'Fantastic',
+}
+newObject.sayNode(); // Node
+newObject.sayJs(); //JS
+console.log(newObject.ES6); //Fantastic
