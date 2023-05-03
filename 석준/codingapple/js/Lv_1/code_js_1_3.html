@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .code1{
+            background-color: skyblue;
+            padding:20px;
+            color: white;
+            border-radius: 5px;
+            display: none;
+            width: 70%;
+        }
+        .code2{
+            background-color: pink;
+            padding:20px;
+            color: white;
+            border-radius: 5px;
+            display: none;
+            width: 70%;
+        }
+        .code3{
+            background-color: yellow;
+            padding:20px;
+            color: white;
+            border-radius: 5px;
+            display: none;
+            width: 70%;
+            
+        }
+    </style>
+</head>
+<body>
+    <h3>알림창 버튼으로 띄우고 지우기</h3>
+    <div class="code1" id="box">알림1
+        <button onclick="closeF()">x</button>    
+    </div>
+    
+    <div class="code2" id="box2">알림2
+        <button onclick="document.getElementById('box2').style.display='none';">x</button>
+    </div>
+    <div class="code3" id="box3">알림3
+        <button onclick="document.getElementById('box3').style.display='none';">x</button>
+    </div>
+    <button onclick="document.getElementById('box').style.display='block',document.getElementById('box2').style.display='block',document.getElementById('box3').style.display='block';">버튼</button>
+    <script>
+        function closeF(){
+            document.getElementById('box').style.display='none';
+        }
+    </script>
+</body>
+</html>
