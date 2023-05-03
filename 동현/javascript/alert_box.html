@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alert_box</title>
+    <style>
+        .alert-box1{
+            background-color: skyblue;
+            padding: 20px;
+            color: white;
+            border-radius: 5px;
+            display: block;
+            /* display -> none 일시 숨김 , block 하면 보임 */
+        }
+        .alert-box2{
+            background-color: rgba(230, 230, 13, 0.875);
+            padding: 20px;
+            color: white;
+            border-radius: 5px;
+            display: block;
+        }
+        .alert-box3{
+            background-color: pink;
+            padding: 20px;
+            color: white;
+            border-radius: 5px;
+            display: block;
+        }
+        div button{
+            float: right;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 각각의 alert-box가 있고 아래 버튼을 누를시 alert-box를 보여주고 오른쪽 x버튼을 누를시 숨기는 기능을 하는 코드-->
+
+    <!-- 세개의 alert-box를 생성함 (안에 각각 id 와 class 지정) -->
+    <div id="open-box1" class="alert-box1">알림창<button onclick="closeButton('open-box1')" style="background-color: skyblue;">x</button></div>
+    <div id="open-box2" class="alert-box2">알림창<button onclick="closeButton('open-box2')" style="background-color: rgba(230, 230, 13, 0.875);">x</button></div>
+    <div id="open-box3" class="alert-box3">알림창<button onclick="closeButton('open-box3')" style="background-color: pink;">x</button></div>
+    <!-- 버튼 생성 -->
+    <button onclick="button()">버튼</button>
+
+    <script>
+        //스택을 사용하여 버튼을 눌러 박스를 제거할때 id값을 push하여 저장해놧다가 버튼을 눌러 다시 보여질때 pop()하여 보여지게 함
+        class Stack {
+            constructor() {
+                this._arr = [];
+            }
+            push(item) {
+                this._arr.push(item);
+            }
+            pop() {
+                return this._arr.pop();
+            }
+            peek() {
+                return this._arr[this._arr.length - 1];
+            }
+        }
+        const stack = new Stack();
+
+        //버튼을 누를시 호출되는 함수로 display 값을 block으로 바꿈
+        function button(){
+            document.getElementById(stack.pop()).style.display = 'block';
+        }
+        //alert-box의 오른쪽 x 버튼을 누를시 호출되는 함수로 display 값을 none으로 바꿈
+        function closeButton(value){
+            stack.push(value);
+            document.getElementById(value).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
