@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .code{
+            background-color: skyblue;
+            padding:20px;
+            color: white;
+            border-radius: 5px;
+            display: none;
+            width: 70%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .dd{
+            background-color: pink;
+            padding:20px;
+            color: white;
+            border-radius: 5px;
+            display: none;
+            width: 70%;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<h3>이벤트 리스너 버튼</h3>
+<body>
+    <div class="code" id="cod1">ID</div>
+    <div class="dd" id="cod2">PASSWORD</div>
+    <button id="btn1">btn1</button>
+    <button id="btn2">btn2</button>
+    <script>
+        document.getElementById('btn1').addEventListener('click',function(){
+            document.getElementById('cod1').style.display='block';
+            document.getElementById('cod2').style.display='none';
+            //class로 찾고 싶을때 getElementClassName(//class명)
+        });
+        document.getElementById('btn2').addEventListener('click',function(){
+            document.getElementById('cod1').style.display='none';
+            document.getElementById('cod2').style.display='block';
+        })
+
+    </script>
+</body>
+</html>
