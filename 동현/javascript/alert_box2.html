@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alert_box2(이벤트리스너 사용하기)</title>
+    <style>
+        .alert-box{
+            background-color: skyblue;
+            color: white;
+            width: 50%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="alert-box" id="alert">
+        <p id="title">알림창</p>
+        <button id="close">닫기</button>
+    </div>
+    <script>
+        //click -> 클릭 , mouseover -> 마우스 갖다대기 , scroll  -> 스크롤 하기 , keydown 키입력 하기 등이 존재
+
+        //이벤트 리스너를 활용하여 버튼 작동시키기
+        //함수 파라미터 안에 함수가 들어가 있음 --> 콜백 함수라고 부른다(순차적인 실행을 하고 싶을때 사용)
+        document.getElementById('close').addEventListener('click',function(){
+            //두개다 사용가능
+            //document.getElementById('alert').style.display = 'none';
+            document.getElementsByClassName('alert-box')[0].style.display = 'none';
+        });
+    </script>
+</body>
+</html>
