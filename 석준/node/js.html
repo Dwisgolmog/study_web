@@ -1,0 +1,24 @@
+<script>
+    //상속 prototype
+    var Human=function(type){
+        this.type=type||'human';
+    };
+    Human.isHuman=function(human){
+        return human instanceof Human;
+    }
+    Human.prototype.breathe=function(){
+        alert('h-a-a-a-m');
+    };
+    var Zero=function(type,firstName,lastName){
+        Human.apply(this, arguments);
+        this.firstname=firstName;
+        this.lastName=lastName;
+    };
+    Zero.prototype =Object.create(Human.prototype);
+    Zero.prototype=constructor=Zero;
+    Zero.prototype.sayName=function(){
+        alert(this.firstName+''+this.lastName);
+    };
+    var oldZero=new Zero();
+    Human.isHuman(oldZero);
+</script>
