@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 기초문법2</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .black-bg {
+            width : 100%;
+            height : 100%;
+            position : fixed;
+            background : rgba(0,0,0,0.5);
+            z-index : 5;
+            padding: 30px;
+            display: none;
+        }
+        .white-bg {
+            background: white;
+            border-radius: 5px;
+            padding: 30px;
+        } 
+    </style>
+</head>
+<body>
+    <div class="black-bg">
+        <div class="white-bg">
+          <h4>로그인하세요</h4>
+          <button class="btn btn-danger" id="close">닫기</button>
+        </div>
+      </div> 
+
+      <button id="test-btn">로그인 버튼</button>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script>
+        $('#test-btn').on('click',function(){
+            //$('.black-bg').css('display','block');
+            $('.black-bg').fadeIn();
+        })
+        $('#close').on('click',function(){
+            $('.black-bg').fadeOut();
+            //$('.black-bg').css('display','none');
+        })
+    </script>
+</body>
+</html>

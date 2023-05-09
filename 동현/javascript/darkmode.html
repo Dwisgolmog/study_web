@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다크모드 만들기</title>
+    <style>
+        .btn-12{
+            background-color: white;
+            position: relative;
+            left: 60px;
+            top: 60px;
+            border:none;
+            box-shadow: none;
+            width: 130px;
+            height: 40px;
+            line-height: 42px;
+            -webkit-perspective: 230px;
+            perspective: 230px;
+        }
+         .btn-12 span {
+            /* background: rgb(0,172,238); */
+            /* background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%); */
+            display: block;
+            position: absolute;
+            width: 130px;
+            height: 40px;
+            box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+            7px 7px 20px 0px rgba(0,0,0,.1),
+            4px 4px 5px 0px rgba(0,0,0,.1);
+            border-radius: 5px;
+            margin:0;
+            text-align: center;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+        }
+        .btn-12 span:nth-child(1) {
+            -webkit-transform: rotateX(90deg);
+            -moz-transform: rotateX(90deg);
+            transform: rotateX(90deg);
+            -webkit-transform-origin: 50% 50% -20px;
+            -moz-transform-origin: 50% 50% -20px;
+            transform-origin: 50% 50% -20px;
+        }
+        .btn-12 span:nth-child(2) {
+            -webkit-transform: rotateX(0deg);
+            -moz-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+            -webkit-transform-origin: 50% 50% -20px;
+            -moz-transform-origin: 50% 50% -20px;
+            transform-origin: 50% 50% -20px;
+        }
+        .btn-12:hover span:nth-child(1) {
+            -webkit-transform: rotateX(0deg);
+            -moz-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+        }
+        .btn-12:hover span:nth-child(2) {
+            color: transparent;
+            -webkit-transform: rotateX(-90deg);
+            -moz-transform: rotateX(-90deg);
+            transform: rotateX(-90deg);
+        }
+
+    </style>
+</head>
+<body>
+    <button class="btn-12"><span class="box">Click!</span><span class="box" id="text">🌙다크 모드로 보기</span></button>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    
+    <script>
+        let count = 0;
+        $('.btn-12').on('click',function(){
+            count++;
+            if(count%2 ==0){
+                // 위에서 부터 순서대로 body 배경색,버튼 뒤의 배경색,버튼의 색,버튼안의 글씨색,버튼안의 글씨
+                $('body').css('background-color','white');
+                $('.btn-12').css('background-color','white');
+                $('.box').css('background','rgb(60, 60, 60)');
+                $('.box').css('color','white');
+                $('#text').text('🌙다크 모드로 보기');
+            }else{
+                $('body').css('background-color','rgb(60, 60, 60)');
+                $('.btn-12').css('background-color','rgb(60, 60, 60)');
+                $('.box').css('background','rgb(0,172,238)');
+                $('.box').css('color','black');
+                $('#text').text('💡라이트 모드로 보기');   
+            }
+        })
+    </script>
+</body>
+</html>

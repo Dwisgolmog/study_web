@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>if/else function을 활용하는 것</title>
+</head>
+<body>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script>
+        function game(number){
+            const num = number %10;
+            if(number>=0 && number<=100){
+                if((num == 3) || (num == 6) || (num == 9)){
+                    console.log('박수 짝짝쓰~');
+                }else{
+                    console.log('통과');
+                }
+            }else{
+                console.log('0~100사이만 입력해주세요');
+            }
+
+        }
+
+        function suscess(num1,num2){
+            if((num1 >= 40) && (num2 >= 40)){
+                if(num1+num2 >= 120){
+                    console.log('합격');
+                }else{
+                    console.log('불합격');
+                }
+            }else{
+                console.log('불합격');
+            }
+        }
+    </script>
+</body>
+</html>
