@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+</body>
+<script>
+    function three_six_nine(num_1){
+        if(num_1%9==0){
+            console.log('정답입니당');
+            console.log('박수')
+        }
+        else if(num_1%6==0){
+            console.log('박수');
+        }
+        else if(num_1%3==0){
+            console.log('박수');
+        }
+        else{
+            console.log('틀림');
+        }
+    }    
+    function pass(p_1,p_2){
+        if(p_1>=40||p_2>=40){
+            var result=p_1+p_2;
+            if(result>=120){
+                console.log('합격');
+            }
+            else{
+                console.log('탈락');
+            }
+        }
+        else
+        {
+            console.log('탈락');
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 폼을 통한 if_else문</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        .before-form{
+            visibility: hidden;
+            opacity: 0;
+            transition: all 1s;
+        }
+        .after-form{
+            visibility: visible;
+            opacity: 0.9;
+        }
+        /* 폼을 나오게 하는 애니메이션 적용 */
+
+        /* 폼 커스텀마이징 */
+        .back-bg{
+            width: 100%;
+            height: 100%;
+            background-color: grey;
+            position: fixed;
+            /* flex로 요소를 가운데에 설정 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .in-bg{
+            background-color: pink;
+            width: 30%;
+            height: 45%;
+            border-radius: 10%;
+            padding: 1%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 로그인 폼 -->
+    <div class="back-bg before-form">
+        <div class="in-bg">
+            <h4>로그인 하기</h4>
+            <form>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">아이디</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">비밀번호</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">컴퓨터가 아닌가요?</label>
+                </div>
+                <button type="submit" class="btn btn-primary submit">Submit</button>
+                <button type="button" class="btn btn-primary cancel">Cancel</button>
+              </form>
+        </div>
+    </div>
+
+    <button id="login">로그인하기</button>
+
+
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+      <script>
+
+        //버튼을 눌렀을때 폼이 나오고 없어지는 애니메이션이 보여지도록 하는 코드
+        $('#login').on('click',function(){
+            $('.before-form').addClass('after-form');
+        })
+
+        $('.cancel').on('click',function(){
+            $('.before-form').removeClass('after-form');
+        })
+        
+
+        //input의 아이디 값을 value에 저장후 비어있는지 검사
+        $('.submit').on('click',function(){
+        
+            if(($('#exampleInputEmail1').val() == '') || ($('#exampleInputPassword1').val() == '')){
+                alert('아이디와 비밀번호를 입력하시오');
+                //false를 반환함으로써 제출을 막음
+                //return false; 또는 아래 방법을 사용
+                event.preventDefault();
+            }else if($('#exampleInputPassword1').val().length < 6){
+                alert('비밀번호를 7자이상 입력하십시오.');
+                event.preventDefault();
+            }else{
+                alert('전송완료');
+            }
+        })
+      </script>
+</body>
+</html>
