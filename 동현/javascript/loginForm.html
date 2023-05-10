@@ -87,12 +87,16 @@
                 //false를 반환함으로써 제출을 막음
                 //return false; 또는 아래 방법을 사용
                 event.preventDefault();
-            }else if($('#exampleInputPassword1').val().length < 6){
-                alert('비밀번호를 7자이상 입력하십시오.');
-                event.preventDefault();
-            }else{
-                alert('전송완료');
-            }
+                }else if($('#exampleInputPassword1').val().length < 6){
+                    alert('비밀번호를 7자이상 입력하십시오.');
+                    event.preventDefault();
+
+                }else if(!/[A-Z]/.test($('#exampleInputPassword1').val())){
+                    alert('대문자를 입력하시오.');
+                    event.preventDefault();
+                }else{
+                    alert('전송 완료');
+                }
         })
       </script>
 </body>

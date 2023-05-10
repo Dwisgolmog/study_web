@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캐러셀 만들기</title>
+    <style>
+        .slice-box{
+            width: 300vw;
+            transition: all 1s;
+            transform: translateX();
+        }
+        .box1{
+            width: 100vw;
+            float: left;
+        }
+        .box1 img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!--  -->
+    <div style="overflow: hidden;">
+        <div class="slice-box">
+            <div class="box1">
+                <img src="/Users/kimdonghyun/Documents/GitHub/study_web/동현/images/car1.png">
+            </div>
+            <div class="box1">
+                <img src="/Users/kimdonghyun/Documents/GitHub/study_web/동현/images/car2.png">
+            </div>
+            <div class="box1">
+                <img src="/Users/kimdonghyun/Documents/GitHub/study_web/동현/images/car3.png">
+            </div>
+        </div>
+    </div>
+    <div>
+        <button class="back">이전</button>
+        <button class="btn-1">1</button>
+        <button class="btn-2">2</button>
+        <button class="btn-3">3</button>
+        <button class="next">다음</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script>
+
+        //setInterval를 사용함으로써 자동으로 페이지를 지속적으로 넘기게 하기
+        let clock = 0;
+        let time = setInterval(nextPage,4000);
+        let page = 0;
+
+        function nextPage(){
+            if(clock%3 == 0){
+                boxOne();
+            }else if(clock%3 == 1){
+                boxTwo();
+            }else{
+                boxThree();
+            }
+            clock++;
+            //단 클락의 크기가 너무 커지면 종료되게 하였음
+            if(clock>1000){
+                clearInterval(time);
+            }
+        }
+
+        $('.back').on('click',function(){
+            if(page == 1) boxThree();
+            else if(page == 2) boxOne();
+            else if(page == 3) boxTwo();
+        })
+        $('.next').on('click',function(){
+            if(page == 1) boxTwo();
+            else if(page == 2) boxThree();
+            else if(page == 3) boxOne();
+        })
+        $('.btn-1').on('click',boxOne);
+        $('.btn-2').on('click',boxTwo);
+        $('.btn-3').on('click',boxThree);
+
+        function boxOne(){
+            $('.slice-box').css("transform","translateX(0vw)");
+            page = 1;
+        }
+        function boxTwo(){
+            $('.slice-box').css("transform","translateX(-100vw)");
+            page = 2;
+        }
+        function boxThree(){
+            $('.slice-box').css('transform','translateX(-200vw)');
+            page = 3;
+        }
+    </script>
+</body>
+</html>

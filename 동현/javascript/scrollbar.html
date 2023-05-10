@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤바를 이용한 여러가지 기능 사용하기</title>
+    <style>
+        .navbar{
+            width: 100%;
+            font-size: 50px;
+            background-color: lightgray;
+            padding: 1%;
+            position: fixed;
+            transition: all 1s;
+            border-bottom: 1px solid black;
+        }
+        /* 스크롤을 내렸을때 글씨 크기 줄이기 */
+        .afternav{
+            font-size: 30px;
+        }
+        .box{
+            height: 1000px;
+        }
+        /* 포지션을 absolute로 해서 nav와 겹치지 않게 보여지게 함 */
+        .hotnews{
+            width: 200px;
+            height: 100px;
+            position: absolute;
+            top: 100px;
+            left: 10px;
+            /* 해당 명령어로 높이를 넘어가면 스크롤바로 만들어짐 */
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body style="margin: 0;">
+
+    <nav class="navbar">
+        Hello World
+    </nav>
+
+        
+    <!-- 임의로 만든 박스 스크롤바 생성 -->
+    <div class="hotnews">
+        오늘의 핫 뉴스 현재 윤주한은 2023년 들어와서 수많은 고난과 역경이 존재하였지만 끝내 이 모든것을 이겨내고
+        드디어 시즌 최고 하이에 도달했다. 현재 5월10일 오후 9시경 그는 마지막 커리어를 걸고 골드 승격전에 도달하였다.
+        평소에 그의 라인은 미드 라인로써 롤이라면 단연코 미드는 가장 스포트라이트가 쏟아지는 라인으로 유명하다. 이러한
+        압박감을 이겨내고 그는 골드 승격전에 도달 할 수 있을지 모두의 관심이 집중되어있다.
+    </div>
+
+    <div class="box"></div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script>
+        // 스크롤값이 100이 넘어가면 afternav를 추가 아니면 afternav를 제거
+        $(window).on('scroll',function(){
+            if($(window).scrollTop() > 100) $('.navbar').addClass('afternav');
+            else if($(window).scrollTop() < 100) $('.navbar').removeClass('afternav');
+        })
+
+        $('.hotnews').on('scroll',function(){
+            let sc = document.querySelector('.hotnews').scrollTop; //div의 스크롤바 내린 양
+            let sch = document.querySelector('.hotnews').clientHeight; //div의 실제 높이
+            let rh = document.querySelector('.hotnews').scrollHeight; //눈에 보이는 div의 높이
+
+            if(sc + sch >= rh){
+                alert('뉴스를 다 읽었습니다');
+            }
+        })
+    </script>
+</body>
+</html>
