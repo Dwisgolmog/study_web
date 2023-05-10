@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <input type="color" />
+      <!-- 텍스트 박스 생성하는 Tag. input은 하나 혹은 여러개의 type을 가질 수 있음.-->
+      <input type="file" accept="image/*" />
+      <!-- type을 file로 설정하면 업로드 할 파일을 선택할 수 있는데 accpet attribute로 어떤 형식의 파일을 선택할지 설정할 수 있음 (.pdf/ .png / image/*(모든 이미지), .png,.pdf(png와 pdf만)) -->
+      <input required placeholder="Name" type="text" />
+      <!-- placeholder attribute는 텍스트 박스에 기본적으로 그 값이 적혀있음 required attribute는 꼭 입력해야 한다는 경고문이 뜸-->
+      <input required placeholder="Last Name" type="text" />
+      <input required placeholder="Username" type="text" />
+      <input required placeholder="Password" minlength="10" type="password" />
+      <!-- type을 password로 설정하면 텍스트 박스 안의 글자를 .으로 보이게 한다. minlength attribute는 텍스트 박스의 최소 입력 길이를 정해줌-->
+      <input type="submit" value="Create Account" />
+      <!-- type을 submit으로 설정하면 버튼을 생성하고 버튼을 누르면 form을 어디론가 보내주는데, 지금은 버튼을 누르면 사이트가 새로고침 된다. value attribute로 버튼 이름을 설정한다. -->
+    </form>
+  </body>
+</html>
