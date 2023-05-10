@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* vw단위는 브라우저 폭에 비례 합니다 */
+        .slide-container{
+            width: 300vw;
+            /* transition은 부드럽게 이동하게 합니다 */
+            transition: all 1s;
+        }
+        .slide{
+            width: 100vw;
+            /* 왼쪽으로 */
+            float: left;
+        }
+        .slide img{
+            width: 300px;
+            height: 500px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div style="overflow: hidden">
+        <div class="slide-container" id="sc">
+            <div class="slide">
+                <img src="/석준/codingapple/image/곽지창.png" alt="충청의 왕">
+            </div>
+            <div class="slide">
+                <img src="/석준/codingapple/image/마태수.png" alt="안산의 왕">
+            </div>
+            <div class="slide">
+                <img src="/석준/codingapple/image/석두.jpeg" alt="수원의 왕">
+            </div>
+        </div>
+    </div>
+    <button class="btn1" id="b_1">1</button>
+    <button class="btn2" id="b_2">2</button>
+    <button class="btn3" id="b_3">3</button>
+    <button id="next">다음</button>
+    <button id="down">이전</button>
+    
+    <script>
+        var count =0;
+        
+        // 버튼을 누를때 1번 사진 2번 사진 3번 사진으로 넘어가게 합니다
+        document.getElementById('b_1').addEventListener('click',function(){
+            document.getElementById('sc').style.transform='translateX(0vw)';
+            count ==1;
+        });
+        document.getElementById('b_2').addEventListener('click',function(){
+            document.getElementById('sc').style.transform='translateX(-100vw)';
+            count =2;
+        });
+        document.getElementById('b_3').addEventListener('click',function(){
+            document.getElementById('sc').style.transform='translateX(-200vw)';
+            count=3;
+        });
+        //다음, 이전 버튼 누르면 움직이기
+        
+        document.getElementById('next').addEventListener('click',function(){
+            count=count+1;
+            
+            document.getElementById('sc').style.transform='translateX(-'+count+'00vm)';
+        })
+        document.getElementById('down').addEventListener('click',function(){
+            count-=1;
+            document.getElementById('sc').style.transform='translateX(-'+count+'00vm)';
+        })
+    </script>
+</body>
+</html>
