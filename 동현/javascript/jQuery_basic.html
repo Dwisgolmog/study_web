@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery 기초문법</title>
+</head>
+<body>
+
+    <p class="hello">hello world</p>
+    <p class="hello">hello world</p>
+    <Button id="test-btn">button</Button>
+
+    <!-- jQuery CDN에서 가져올수 있으며 jQuery를 쓰는 문장 위에 배치 해야 사용가능 -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script>
+        //document.querySelector('.hello').innerHTML = "good bye";
+
+        //위의 문법을 jqeury를 사용하여 단순화 시킴
+
+        $('.hello').html('good bye'); //해당 되는 모든 hello 클래스를 선택하여 적용함
+        $('.hello').css('color','red');
+        $('.hello').addClass('show'); //remove 와 toggle도 있음
+
+        $('#test-btn').on('click',function(){
+            //UI 애니메이션 적용
+            $('.hello').fadeOut();
+        })
+    </script>
+</body>
+</html>

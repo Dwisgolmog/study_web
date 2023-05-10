@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>setTimeout 함수 사용하기</title>
+  <style>
+    div{
+      width: 300px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: lightgray;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    5초 이내로 클릭 하시오
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  
+  <script>
+    let count = 5;
+    
+    let interval = setInterval(textBox,1000);
+
+    function textBox(){
+      $('.box').text(`${count}초 이내로 클릭 하시오`);
+      count--;
+      if(count < 0){
+        $('.box').css('display','none'); // count가 0보다 작을시 박스를 안보이게 해줌
+        clearInterval(interval); //setInterval의 타이머를 멈추게 함
+      }
+    }
+  </script>
+</body>
+</html>

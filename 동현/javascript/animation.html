@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS로 애니메이션 만들기</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+        .list-group{
+            /* visibility: visible; */
+            /* 투명도 조절 0이 투명 1이 불투명 0.5가 중간값 */
+            /* opacity: 0;  */
+            overflow: hidden;
+            height: 10px;
+            transition: all 1s;
+        }
+        .list-show{
+            /* visibility: visible; */
+            /* opacity: 1; */
+            overflow:scroll;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+        <!-- One-way UI 애니메이션 만드는법
+            1.시작 스타일
+            2.최종 스타일
+            3.원할 때 최총스타일로 변환하는 코드
+            4.transtition 추가
+            -->
+
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- 리스트 -->
+      <ol class="list-group list-group-numbered">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Subheading</div>
+            Content for list item
+          </div>
+          <span class="badge bg-primary rounded-pill">14</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Subheading</div>
+            Content for list item
+          </div>
+          <span class="badge bg-primary rounded-pill">14</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">Subheading</div>
+            Content for list item
+          </div>
+          <span class="badge bg-primary rounded-pill">14</span>
+        </li>
+      </ol>
+
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+      <script>
+        //클래스 추가해주는 jQuery 문법
+        $('.navbar-toggler').on('click',function(){
+            $('.list-group').addClass('list-show');
+        })
+      </script>
+</body>
+</html>
