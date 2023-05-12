@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 100vh;
+        margin: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap-reverse;
+        /* 웹의 창을 줄이면 내용도 같이 줄어드는걸 wrapping이라고 함.
+        flex-wrap은 nowrap이 default이며 창을 줄여도 모든 요소를 같은 줄에 있게 한다.
+        wrap은 명시된 사이즈로 반영한다.
+        wrap-reverse는 요소의 순서를 반대로 만듦 */
+        flex-direction: row-reverse;
+        /* 주축과 교차축의 default를 바꾸기 위해 사용 default는 row임 */
+      }
+      div {
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 300px;
+        font-size: 28px;
+        color: white;
+        background-color: teal;
+      }
+      #second {
+        background-color: wheat;
+      }
+    </style>
+  </head>
+  <body>
+    <div>1</div>
+    <div id="second">2</div>
+    <div>4</div>
+  </body>
+</html>

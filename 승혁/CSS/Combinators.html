@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 1000vh;
+        margin: 50px;
+      }
+      span {
+        background-color: yellowgreen;
+        padding: 5px;
+        border-radius: 10px;
+      }
+      p span {
+        color: white;
+        text-decoration: none;
+      }
+      p ~ span {
+        /* 바로 뒤에 오지 않는 형제
+        >는 자식을 뜻함 
+        +는 바로 다음에 오는 형제*/
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod commodi
+        esequi ipsam odio dolorem.<span>inside</span>
+      </p>
+      <address>hi</address>
+      <span>hello</span>
+    </div>
+  </body>
+</html>

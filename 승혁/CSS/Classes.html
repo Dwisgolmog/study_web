@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 20px;
+      }
+      p {
+        display: inline;
+        /* inline은 높이와 너비가 없기 때문에 위 애라 margin을 가질 수 없다. padding은 가능하다. 실전에서 이런 상황에 위, 아래에 margin을 적용하고 싶다면 inline요소들을 block으로 바꿔야 한다. */
+        background-color: teal;
+        padding: 20px;
+        margin: 30px;
+      }
+      #tomato {
+        background-color: tomato;
+      }
+      #tomato2 {
+        background-color: tomato;
+      }
+      #tomato3 {
+        background-color: tomato;
+      }
+      /* 같은 Tags중 일부만 어떤 속성을 적용하고 일부는 다른 속성을 적용할 때 id를 사용하여 적용할 수 있지만 같은 코드를 여러번 반복 사용하기 때문에 비효율적이다.
+      또한 id는 고유의 값을 가져야 하는데 tomato라는 id는 하나가 아니다. tomato가 3번이나 반복되고 있어서 비효율적이다. id는 겹치면 안되기 때문에 요소를 가리킬 수 있으면서도 겹쳐도 되는 방법이 있으면 좋다. 그게 바로 class다. */
+      #teal,
+      #tomato {
+        /* selector간에 ,를 넣어 하나로 묶을 수 있다. */
+      }
+      .btn {
+        padding: 5px 10px;
+        border-radius: 5px;
+        /* border-radius는 border의 모서리를 둥글게 해줌 */
+      }
+      .teal {
+        background-color: teal;
+      }
+      .tomato {
+        background-color: tomato;
+        color: white;
+      }
+      /* .은 class명 이라는 뜻이다. */
+    </style>
+  </head>
+  <body>
+    <p>hello</p>
+    <p>hello</p>
+    <br /><br /><br /><br />
+    <span>hello</span>
+    <span id="tomato">hello</span>
+    <span>hello</span>
+    <span id="tomato2">hello</span>
+    <span>hello</span>
+    <span id="tomato3">hello</span>
+    <span>hello</span>
+    <br /><br /><br /><br />
+    <span class="btn teal">hello</span>
+    <span class="btn tomato">hello</span>
+    <span class="btn teal">hello</span>
+    <span class="btn tomato">hello</span>
+    <span class="btn teal">hello</span>
+    <span class="btn tomato">hello</span>
+    <span class="btn teal">hello</span>
+    <!-- class는 여러 요소들에서 쓸 수 있다.  class를 많은 곳에서 원하는 만큼 사용해도 된다.
+    class명은 고유할 필요가 없고 여러 요소들이 같이 쓸 수 있다. -->
+  </body>
+</html>

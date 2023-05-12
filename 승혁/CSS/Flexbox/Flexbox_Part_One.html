@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 100vh;
+        /* vh는 viewport height라는 뜻으로 화면 높이의 100%를 말함 */
+        margin: 20px;
+        display: flex;
+        justify-content: space-between;
+        /* 주축의 빈 공간을 같은 크기로 나누어 배치 */
+        align-items: center;
+        /* 교차축을 수평으로 배치 */
+      }
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: teal;
+      }
+      #second {
+        background-color: wheat;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div id="second"></div>
+    <div></div>
+  </body>
+</html>

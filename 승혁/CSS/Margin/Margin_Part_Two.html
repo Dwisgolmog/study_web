@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Nico Times</title>
+    <style>
+      html {
+        background-color: tomato;
+      }
+      body {
+        margin: 20px 5px 12px 99px;
+        /* mmargin: 10px -> 상하좌우 모두 10px
+           margin: 10px 20px -> margin을 두 개 주면 '상하''좌우'를 뜻함 
+           margin: 10px 20px 30px 40px -> 각각 상하좌우를 뜻함*/
+        background-color: thistle;
+      }
+      div {
+        margin: 80px 15px;
+        /* 1box의 경계가 2box의 경계와 같다면 두 box의 margin은 하나로 취급된다. 이 현상은 위,아래쪽에서만 일어난다. */
+        height: 150px;
+        width: 150px;
+        background-color: whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+  </body>
+  <!-- body의 크기는 안에 있는 내용의 사이즈 만큼이 된다. -->
+</html>
