@@ -10,14 +10,24 @@
             width: 100%;
             font-size: 50px;
             background-color: lightgray;
-            padding: 1%;
+            padding: 0;
             position: fixed;
             transition: all 1s;
-            border-bottom: 1px solid black;
+            display: flex;
+            flex-flow: column;
         }
         /* 스크롤을 내렸을때 글씨 크기 줄이기 */
         .afternav{
             font-size: 30px;
+        }
+        /* 진행도 박스 */
+        .conBar{
+            background-color: black;
+            height: 8px;
+            width: 1%;
+            /* display: flex;
+            flex-flow: row;
+             */
         }
         .box{
             height: 1000px;
@@ -27,7 +37,7 @@
             width: 200px;
             height: 100px;
             position: absolute;
-            top: 100px;
+            top: 70px;
             left: 10px;
             /* 해당 명령어로 높이를 넘어가면 스크롤바로 만들어짐 */
             overflow-y: scroll;
@@ -38,6 +48,9 @@
 
     <nav class="navbar">
         Hello World
+        <div class="conBar">
+            
+        </div>
     </nav>
 
         
@@ -49,15 +62,21 @@
         압박감을 이겨내고 그는 골드 승격전에 도달 할 수 있을지 모두의 관심이 집중되어있다.
     </div>
 
+    <!-- 빈 박스 -->
     <div class="box"></div>
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script>
-        // 스크롤값이 100이 넘어가면 afternav를 추가 아니면 afternav를 제거
+        //해당 웹(window)을 스크롤할때 이벤트 발생
         $(window).on('scroll',function(){
+            //스크롤값이 100이 넘어가면 afternav를 추가 아니면 afternav를 제거
             if($(window).scrollTop() > 100) $('.navbar').addClass('afternav');
             else if($(window).scrollTop() < 100) $('.navbar').removeClass('afternav');
+
+            //스크롤의 백분율값을 구하는 공식을 통하여 width값을 %으로 변경시켜줌
+            let length = (($(window).scrollTop() / ($(document).height() - $(window).height())) * 100);
+            $('.conBar').css('width',length + '%');
         })
 
         $('.hotnews').on('scroll',function(){

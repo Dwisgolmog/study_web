@@ -90,13 +90,34 @@
                 }else if($('#exampleInputPassword1').val().length < 6){
                     alert('비밀번호를 7자이상 입력하십시오.');
                     event.preventDefault();
-
+                //정규식을 사용하여 영어 대문자가 들어가지 않을때를 판단
                 }else if(!/[A-Z]/.test($('#exampleInputPassword1').val())){
                     alert('대문자를 입력하시오.');
                     event.preventDefault();
                 }else{
                     alert('전송 완료');
                 }
+        })
+
+
+        //이벤트 버블링 현상!!
+        //요소를 클릭하면 해당 요소의 부모요소까지 모두 클릭한 처리가 발생함
+        //해당 현상을 방지하기 위해서는 fucntion()안에 e값을 집어 넣어 이벤트 관리 해야함
+
+        //로그인폼 생성시 검은화면 클릭시 폼 화면이 닫히게 하는 기능
+        $('.back-bg').on('click',function(e){
+            //e.target --> 유저가 실제로 누른곳
+            //그냥 스크립트의 경우 e.target을 해야하고 jqeury같은 경우 $()를 넣어야함
+
+
+            //밑의 조건문과 동일한 결과값을 보이는 것들
+            //e.target == this
+            //e.target == e.currentTarget //이벤트리스너가 달린곳
+
+            //jQuery 셀렉터끼리는 등호비교가 불가능함으로 is를 사용
+            if($(e.target).is($('.back-bg'))){
+                $('.before-form').removeClass('after-form');
+            }
         })
       </script>
 </body>

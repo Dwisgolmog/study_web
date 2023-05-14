@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tab기능 구현하기</title>
+
+    <style>
+        ul.list {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          border-bottom: 1px solid #ccc;
+        }
+        ul.list::after {
+          content: '';
+          display: block;
+          clear: both;
+        }
+        .tab-button {
+          display: block;
+          padding: 10px 20px 10px 20px;
+          float: left;
+          margin-right: -1px;
+          margin-bottom: -1px;
+          color: grey;
+          text-decoration: none;
+          cursor: pointer;
+        }
+        .orange {
+          border-top: 2px solid orange;
+          border-right: 1px solid #ccc;
+          border-bottom: 1px solid white;
+          border-left: 1px solid #ccc;
+          color: black;
+          margin-top: -2px;
+        }
+        .tab-content {
+          display: none;
+          padding: 10px;
+        }
+        .show {
+          display: block;
+        }
+      </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <ul class="list">
+            <!-- data-id 를 통한 dataset -->
+          <li class="tab-button" data-id="0">Products</li> 
+          <li class="tab-button orange" data-id="1">Information</li>
+          <li class="tab-button" data-id="2">Shipping</li>
+        </ul>
+        <div class="tab-content">
+          <p>상품설명입니다. Product</p>
+        </div>
+        <div class="tab-content show">
+          <p>스펙설명입니다. Information</p>
+        </div>
+        <div class="tab-content">
+          <p>배송정보입니다. Shipping</p>
+        </div>
+      </div> 
+
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    
+      <script>
+
+        //자주스 쓰는 설렉터는 속도 향상을 위해서 변수에 넣어서 사용함
+        const tabButton = $('.tab-button');
+        const tabContent =  $('.tab-content');
+
+                        //방법1 --> 세개의 이벤트 리스너 생성하기
+        // tabButton.eq(0).on('click',function(){
+        //     tabButton.removeClass('orange');
+        //     abContent.removeClass('show');
+        //     tabButton.eq(0).addClass('orange');
+        //     tabContent.eq(0).addClass('show');
+        // })
+        
+        // tabButton.eq(1).on('click',function(){
+        //     tabButton.removeClass('orange');
+        //     abContent.removeClass('show');
+        //     tabButton.eq(1).addClass('orange');
+        //     tabContent.eq(1).addClass('show');
+        // })
+        
+        // tabButton.eq(2).on('click',function(){
+        //     tabButton.removeClass('orange');
+        //     abContent.removeClass('show');
+        //     tabButton.eq(2).addClass('orange');
+        //     tabContent.eq(2).addClass('show');
+        // })
+        
+                        //방법2 --> for문과 function 사용하기
+        //tab을 포함하는 class (큰따옴표와 작은 따옴표 구분해야함)
+        // let classCnt = $("[class *= 'tab-c']").length;
+
+        // //반복문을 사용하여 이벤트리스터 사용 주의(i의 값은 var가아닌 let을 사용해야함 --> 변수의 범위때문)
+        // for(let i =0 ; i<classCnt; i++){
+        //     tabButton.eq(i).on('click',function(){
+        //        switchClass(i);
+        //     });
+        // }
+
+                        //방법3 --> 이벤트리스너를 하나만 사용하기
+                        //이벤트리스너가 줄어들수록 램 용량을 적게 사용함(성능적으로 이점발생)
+        // $('.list').click(function(e){
+        //     if($(e.target).is(tabButton.eq(0))){
+        //         switchClass(0);
+        //     }
+        //     if($(e.target).is(tabButton.eq(1))){
+        //         switchClass(1);
+        //     }
+        //     if($(e.target).is(tabButton.eq(2))){
+        //         switchClass(2);
+        //     }
+        // });
+                        //방법4 --> dataset 사용하기
+                        //dataset은 html태그에 정보를 몰래 숨겨놓은 것
+        $('.list').click(function(e){
+            switchClass(e.target.dataset.id) //누른타켓의 dataset id값을 줌
+        })
+        
+        //버튼을 스위치 해주는 함수
+        function switchClass(i){
+            tabButton.removeClass('orange');
+            tabContent.removeClass('show');
+            tabButton.eq(i).addClass('orange');
+            tabContent.eq(i).addClass('show');
+        }
+      </script>
+</body>
+</html>
