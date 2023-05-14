@@ -11,7 +11,9 @@
     <h2>input</h2>
     <input type="text" id="inputbox" />
     <h2>form</h2>
-    <input type="text" name="username" />
-    <button type="submit">제출</button>
+    <form action="/server-url" onsubmit="alert('hello')">
+      <input type="text" name="username" />
+      <button type="submit">제출</button>
+    </form>
   </body>
 </html>

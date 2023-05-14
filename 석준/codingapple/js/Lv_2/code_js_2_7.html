@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: rgb(211, 188, 211);
+        width: 100%;
+        height: 2000px;
+        margin: 0;
+        padding: 0;
+      }
+      .lorem {
+        background-color: white;
+        z-index: 2;
+        position: fixed;
+        top: 60px;
+      }
+      #nav {
+        background-color: skyblue;
+        font-size: 30px;
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        top: 0;
+        z-index: 5;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <nav id="nav">Scroll</nav>
+    </div>
+    <div
+      class="lorem"
+      id="h"
+      style="width: 200px; height: 100px; overflow-y: scroll"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas
+      voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat
+      sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur
+      praesentium exercitationem.
+    </div>
+
+    <script>
+      window.addEventListener('scroll', function () {
+        if (window.scrollY <= 100) {
+          document.getElementById('nav').style.fontSize = '40px';
+        } else if (window.scrollY > 100) {
+          
+          document.getElementById('nav').style.fontSize = '10px';
+        }
+      });
+      // scrollY 위에서 스크롤 한 양
+      // scrollTop 위에서 얼마나 내렸는지
+      // scrollHeight 스크롤가능한 실제높이// 실제 높이
+      // clientheight 현재 화면에 보이는 스크롤 화면의 높이
+      document.getElementById('h').addEventListener('scroll', function () {
+        var roll = document.querySelector('.lorem').scrollTop;
+        var rollH = document.querySelector('.lorem').scrollHeight;
+        var result = rollH - (roll + 100);
+        if (result <= 10) {
+          alert('거의 다 내림');
+        }
+      });
+    </script>
+  </body>
+</html>

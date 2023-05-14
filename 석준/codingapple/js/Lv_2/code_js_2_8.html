@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #body {
+        height: 3000px;
+      }
+      #scroll_top_bar {
+        background-color: black;
+        position: fixed;
+        height: 20px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: red;
+      }
+      #top_bar {
+        width: 0%;
+        height: 100%;
+        transition: width 0.3s ease;
+        background-color: greenyellow;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body id="body">
+    <div id="scroll_top_bar">
+      <div id="top_bar">Scroll0%</div>
+    </div>
+    <script>
+      // scrollY 위에서 스크롤 한 양
+      // scrollTop 위에서 얼마나 내렸는지
+      // scrollHeight 스크롤가능한 실제높이// 실제 높이
+      // clientheight 현재 화면에 보이는 스크롤 화면의 높이
+      // scrollTop/scrollHeight*100=percent
+
+      window.addEventListener('scroll', function () {
+        var rollTop = document.documentElement.scrollTop;
+        // scrollHeight만 하게 되는 경우 현재보이는 clientHeight가 포함이 안됨
+        // scrollHeight-clientHeight를 해야 스크롤을 끝까지 내렸을 경우 100프로가 됨
+        var rollHeight =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        var percent = (rollTop / rollHeight) * 100;
+
+        document.querySelector('#top_bar').style.width = percent + '%';
+        console.log(percent);
+        document.querySelector('#top_bar').innerHTML =
+          'Scroll__' + percent.toFixed(2);
+      });
+    </script>
+  </body>
+</html>

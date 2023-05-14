@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>return</h3>
+    <script>
+        // 시간 ms단위 변환 리턴
+        function mst(m,s){
+            
+            var result=0;
+            result=(m*60+s)*1000;
+            return result;
+        }
+        // 10% 할인 첫구매시 추가 할인 -1.5
+        function dc(p,b){
+            var result_2=0;
+            if(b==true){
+                result_2=(p*0.9-1.5).toFixed(2);
+                return result_2;
+            }
+            else if(b==false){
+                result_2=(p*0.9).toFixed(2);
+                return result_2;
+            }
+        }
+    </script>
+</body>
+</html>

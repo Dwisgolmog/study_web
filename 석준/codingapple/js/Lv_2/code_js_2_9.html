@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      ul.list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        border-bottom: 1px solid #ccc;
+      }
+      ul.list::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      .tab-button {
+        display: block;
+        padding: 10px 20px 10px 20px;
+        float: left;
+        margin-right: -1px;
+        margin-bottom: -1px;
+        color: grey;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .orange {
+        border-top: 2px solid orange;
+        border-right: 1px solid #ccc;
+        border-bottom: 1px solid white;
+        border-left: 1px solid #ccc;
+        color: black;
+        margin-top: -2px;
+      }
+      .tab-content {
+        display: none;
+        padding: 10px;
+      }
+      .show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>tab기능 만들며 배우는 for</h3>
+    <!-- tab을 누르면 속성 나오기 -->
+    <div class="container mt-5">
+      <ul class="list">
+        <li class="tab-button">Products</li>
+        <li class="tab-button orange">Information</li>
+        <li class="tab-button">Shipping</li>
+      </ul>
+      <div class="tab-content">
+        <p>상품설명입니다. Product</p>
+      </div>
+      <div class="tab-content show">
+        <p>스펙설명입니다. Information</p>
+      </div>
+      <div class="tab-content">
+        <p>배송정보입니다. Shipping</p>
+      </div>
+    </div>
+    <!--------------------------------------------------------------------------------- -->
+    <script>
+      //버튼 을 누르면 orange 클래스명 추가 모든 버튼에 붙은 orange 클래스명 제거
+      //모든 div에 붙은 show 제거 show 추가
+      // 셀렉터 변수에 넣어 쓰는걸 습관으로 하자
+      document.getElementsByClassName('tab-button')[0].addEventListener('click', function () {
+          document.getElementsByClassName('tab-button')[0].classList.add('orange');
+          document.getElementsByClassName('tab-button')[1].classList.remove('orange');
+          document.getElementsByClassName('tab-button')[2].classList.remove('orange');
+          document.getElementsByClassName('tab-content')[0].classList.add('show');
+          document.getElementsByClassName('tab-content')[1].classList.remove('show');
+          document.getElementsByClassName('tab-content')[2].classList.remove('show');
+        });
+      document.getElementsByClassName('tab-button')[1].addEventListener('click', function () {
+        document.getElementsByClassName('tab-button')[1].classList.add('orange');
+        document.getElementsByClassName('tab-button')[0].classList.remove('orange');
+        document.getElementsByClassName('tab-button')[2].classList.remove('orange');
+        document.getElementsByClassName('tab-content')[1].classList.add('show');
+        document.getElementsByClassName('tab-content')[0].classList.remove('show');
+        document.getElementsByClassName('tab-content')[2].classList.remove('show');
+      });
+      document.getElementsByClassName('tab-button')[2].addEventListener('click', function () {
+        document.getElementsByClassName('tab-button')[2].classList.add('orange');
+        document.getElementsByClassName('tab-button')[1].classList.remove('orange');
+        document.getElementsByClassName('tab-button')[0].classList.remove('orange');
+        document.getElementsByClassName('tab-content')[2].classList.add('show');
+        document.getElementsByClassName('tab-content')[1].classList.remove('show');
+        document.getElementsByClassName('tab-content')[0].classList.remove('show');
+      });
+    </script>
+  </body>
+</html>
