@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Nico Times</title>
+    <style>
+      span {
+        display: block;
+        /* inline을 block으로 바꾸는걸 display 속성이라 함 */
+        background-color: turquoise;
+      }
+      p {
+        display: inline;
+        background-color: red;
+      }
+      html {
+        background-color: tomato;
+      }
+      /* 전체 문서에 적용됨 */
+      body {
+        margin: 0;
+        /* 브라우저가 기본적으로 body에 display:blcok과 margin: 8px을 줌. margin이란 box가 갖고 있는 속성 중 하나로, box의 border(경계)의 바깥에 있는 공간이다.*/
+        background-color: thistle;
+      }
+      div {
+        margin-top: 20px;
+        margin-left: 10px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+        /* margin을 상하좌우로 각각 줄 수도 있음 */
+        height: 150px;
+        width: 150px;
+        background-color: whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <p>a</p>
+    <span>hello</span> <span>hello</span>
+    <div></div>
+  </body>
+  <!-- body의 크기는 안에 있는 내용의 사이즈 만큼이 된다. -->
+</html>

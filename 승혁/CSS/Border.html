@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Nico Times</title>
+    <style>
+      * {
+        border: 2px dashed black;
+        /* border에 dashed sytle을 사용하면 점선이 적용됨 */
+      }
+      /* *은 전체를 뜻하여 *안에 있는 코드는 모든 요소에 적용됨 */
+      html {
+        background-color: tomato;
+      }
+      body {
+        margin: 20px;
+        padding: 20px;
+        background-color: thistle;
+      }
+      div {
+        padding: 20px;
+        border: 2px solid black;
+        /* border는 말 그대로 box의 경계이다. border는 많은 속성이 있지만 대부분 border는 이쁘지 않기 때문에 여러 종류의 border를 많이 쓰진 않고 거의 한 종류만 쓴다. */
+      }
+      span {
+        border-style: dotted;
+      }
+      #first {
+        background-color: whitesmoke;
+        width: 150px;
+        height: 150px;
+      }
+      #second {
+        background-color: teal;
+        width: 100px;
+        height: 100px;
+      }
+      #third {
+        background-color: wheat;
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="first">
+      <div id="second">
+        <div id="third">
+          <span>hello</span>
+          <!-- inline에도 border가 적용됨 -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

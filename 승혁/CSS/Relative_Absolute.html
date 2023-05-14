@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html{
+        background-color: black;
+      }
+      body {
+        height: 1000vh;
+        margin: 50px;
+      }
+      div {
+        width: 300px;
+        height: 300px;
+        background-color: wheat;
+        position: relative;
+        /* element를 아주 조금씩만 옮기고 싶을 때 사용
+        position을 relative로 하면 top,bottom,left,right속성을 사용할 수 있음 */
+      }
+      .green{
+        background-color: teal;
+        height: 100px;
+        position: absolute;
+        /* absolute는 가장 가까운 relative 부모를 기준으로 이동시켜줌 모든 부모에 relative가 없다면 body가 relative한 부모가 됨 */
+        bottom: 0px;
+        right: 0px;
+        height: 100px;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+      <div>
+        <div class="green"></div>
+      </div>
+  </body>
+</html>
