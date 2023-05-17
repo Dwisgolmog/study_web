@@ -44,12 +44,16 @@
         //client-side rendering
         //서버가 비어있는 html과 데이터만 보내줌
         //자바스크립트를 이용해서 고객 브라우저안에서 html을 완성하는것
-        document.getElementById('zero').innerHTML=products[0].title;
-        document.getElementById('zerop').innerHTML=products[0].price;
-        document.getElementById('one').innerHTML=products[1].title;
-        document.getElementById('onep').innerHTML=products[1].price;
-        document.getElementById('two').innerHTML=products[2].title;
-        document.getElementById('twop').innerHTML=products[2].price;
+        // document.getElementById('zero').innerHTML=products[0].title;
+        // document.getElementById('zerop').innerHTML=products[0].price;
+        // document.getElementById('one').innerHTML=products[1].title;
+        // document.getElementById('onep').innerHTML=products[1].price;
+        // document.getElementById('two').innerHTML=products[2].title;
+        // document.getElementById('twop').innerHTML=products[2].price;
+        for(var i=0;i<3;i++){
+          document.querySelectorAll('h5')[i].innerHTML=products[i].title;
+          document.querySelectorAll('p')[i].innerHTML=products[i].price;
+        }
 
 
       </script> 
