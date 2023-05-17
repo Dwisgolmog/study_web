@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <title>Document</title>
+    <style>
+      a {
+        color: wheat;
+        background-color: tomato;
+        text-decoration: none;
+        padding: 3px 5px;
+        border-radius: 5px;
+        font-size: 55px;
+        transition: all 1s cubic-bezier(0.6, 0, 0.735, 0.045);
+        /* a에서 바뀌는 모든 부분을 1초동안 변화가 일어나게 애니메이션 만드는데 cubic-bezier로 본인만의 커브를 만들 수 있다. */
+      }
+      a:hover {
+        border-radius: 20px;
+        color: tomato;
+        background-color: wheat;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#">Go home</a>
+    <!-- 애니메이션을 위한 코드 연습으로, 링크 대신 #으로 대체함 -->
+  </body>
+</html>
