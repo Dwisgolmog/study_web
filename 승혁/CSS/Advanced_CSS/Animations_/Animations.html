@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+      @keyframes superSexyCoinFlip {
+        /* 특정 조건을 주지 않아도 애니메이션을 얻을 수 있음 */
+        0% {
+          transform: rotateY(0);
+        }
+        25% {
+          transform: scale(2);
+        }
+        50% {
+          border-radius: 0px;
+          transform: rotateY(180deg) translateY(100px);
+          border-color: tomato;
+          opacity: 0;
+          /* 자주 보게 될 것 중에 하나로, opacity를 없애버리면 사라졌다가 나타난다. */
+        }
+        75% {
+          transform: scale(5);
+          border-radius: 20px;
+        }
+        100% {
+          /* 기본적으로 애니메이션이 원래 위치로 돌아오게 함 */
+          transform: rotateX(0);
+        }
+      }
+      img {
+        border: 10px solid black;
+        border-radius: 50%;
+        animation: superSexyCoinFlip 5s ease-in-out infinite;
+        /* infinite를 추가하여 무한 반복을 할 수 있다. */
+      }
+    </style>
+  </head>
+  <body>
+    <img src="./cute.jpg" />
+  </body>
+</html>
