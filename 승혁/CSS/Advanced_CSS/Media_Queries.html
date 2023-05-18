@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      div {
+        background-color: teal;
+        width: 200px;
+        height: 200px;
+      }
+      @media screen and (min-device-width: 601px) and (max-width: 1200px) and (orientation: portrait) {
+        /* screen이 601px ~ 1200px이고 세로 모드일 때  적용된다. divece를 추가하면 모바일에서만 적용된다.*/
+        div {
+          background-color: wheat;
+        }
+      }
+      span {
+        font-size: 36px;
+      }
+      @media screen and (orientation: landscape) {
+        /* screen이 가로 모드일때 */
+        span {
+          display: none;
+        }
+      }
+      @media print {
+        /* 스크린을 프린트하고 싶을 때 사용한다. */
+        body {
+          background-color: tomato;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <span>Please flip your phone :(</span>
+  </body>
+</html>
