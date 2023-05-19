@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .size{
+            display: none;
+        }
+        .hid{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form class="container my-5 form-group">
+        <p>상품선택</p>
+        <select class="form-select mt-2">
+            <option id="h">모자</option>
+            <option id="s">셔츠</option>
+        </select>
+        <select class="size">
+            <option>95</option>
+            <option>100</option>
+            <option>105</option>
+            <option>106</option>
+        </select>
+    </form>
+
+    <script>
+        //select option 클릭시 select 추가
+        document.querySelector('.mt-2').addEventListener('change',function(){
+            document.getElementsByClassName('size')[0].classList.add('hid');
+        })
+    </script>
+</body>
+</html>
