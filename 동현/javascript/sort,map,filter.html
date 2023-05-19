@@ -13,6 +13,8 @@
         <div class="row">
         </div>
     </div> 
+
+    <!-- 3개의 버튼 생성 -->
     <div class="container">
         <button class="btn btn-danger sort">이름순 정렬</button>
     </div>
@@ -45,7 +47,7 @@
             if(a.title == b.title) return 0;
             })
 
-            //초기화 후 다시 정렬
+            //초기화 후 다시 정렬데이터 다시 뿌리기
             $('.row').html('');
             EachFor(products,'.row');
         })
