@@ -1,0 +1,51 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        
+        <script>            
+            let 출석부 = ['흥민', '영희', '철수', '재석']
+            let 존재하는이름;
+        
+            //find 또는 indexOf를 사용하는것 또한 좋음
+            function 이름찾기(이름){
+                출석부.forEach(출석부이름 => {
+                    if(이름 == 출석부이름){
+                        존재하는이름 = 이름;
+                    }
+                });
+
+                //입력한 이름이 있을시 '하잇!!' 을 출력 아니면 '그자식은 크흠...'을 출력
+                if(존재하는이름 != null){
+                    console.log('하잇!!');
+                    존재하는이름 = null; //이후 변수 초기화
+                }else{
+                    console.log('그자식은 크흠...');
+                }
+            }
+            
+            //기존성적=>배열 입력, 이번 성적=>숫자 입력시 평균을 계산하여 점수의 향상도를 알려줌
+            function 모의고사(기존성적,이번성적){
+                let 총합 = 0;
+                기존성적.forEach(성적 =>{
+                    총합 +=성적;
+                });
+
+                let 평균 = 총합/기존성적.length;
+                if(평균 < 이번성적){
+                    console.log(`평균보다 ${이번성적-평균}점이 올랐네요.`);
+                }else{
+                    console.log(`평균보다 ${평균-이번성적}점이 떨어졌네요.`);
+                }
+            }
+
+            //for in 사용법
+            var obj = { name : 'kim', age : 20 }
+            
+            for (var 키값 in obj){
+                console.log(키값)
+            }
+        </script>
+    </body>
+</html>
