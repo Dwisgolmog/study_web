@@ -14,30 +14,49 @@
         </div>
     </div> 
 
-    <!-- 3개의 버튼 생성 -->
+    <!-- 4개의 버튼 생성 -->
     <div class="container">
         <button class="btn btn-danger sort">이름순 정렬</button>
-    </div>
-
-    <div class="container" style="margin-top: 30px;">
         <button class="btn btn-danger price">6만원 이하 상품만 보기</button>
+        <button class="btn btn-danger discount">10%할인 받기</button>
+        <button class="btn btn-danger revert">되돌리기</button>
     </div>
     
-    <div class="container" style="margin-top: 30px;">
-        <button class="btn btn-danger discount">10%할인 받기</button>
+    <!-- 입력한 가격 상품 찾기 -->
+    <div class="container">
+        <p>찾고 싶은 가격을 입력하시오</p>
+        <input type="text" id="searchPrice">
+        <button class="btn btn-danger search">찾기</button>
     </div>
+
+
+
+
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script>
 
         //상품관련된 데이터
-        var products = [
+        let products = [
           { id : 0, price : 70000, title : 'Blossom Dress' },
           { id : 1, price : 50000, title : 'Springfield Shirt' },
           { id : 2, price : 60000, title : 'Black Monastery' }
         ];
         
+        // 밑에 두개는 얕은 복사로써 원본의 내용이 바뀌면 복사본의 내용 또한 바뀌게 된다.
+        // const copyProducts = products
+        // const copyProducts = Object.assign({} , products);
+        // const copyProducts = [...products]  // => 전개 연산자또한 마찬가지다
+        // const copyProducts = products.slice(); // => slice의 경우 1차 깊이까지는 가능하지만 2차 깊이 부터는 원본을 참조한다.
+
+        //깊은 복사 => JSON 사용 (stringify()로 문자열을 만들어 복사한후 parse()로 다시 객체화함)
+        //성능적으로 느리고 객체의 함수나 undefined 값은 복사가 되지 않는 문제가 있음
+        const copyProducts = JSON.parse(JSON.stringify(products));
+
+
         //정렬 버튼 클릭시 이름순으로 정렬
         $('.sort').click(function(){
             //오름정렬  (원본을 변형함)
@@ -75,6 +94,32 @@
             })
 
             $('.row').html('');
+            EachFor(products,'.row');
+        })
+
+
+        //찾기 버튼 클릭시 text에 있는 가격을 찾아서 보여주기
+        $('.search').click(function(){
+            let priceValue = Number($('#searchPrice').val());
+            let findValue = []; //해당 조건을 만족할 데이터를 담을 새로운 배열 생성
+            let count = 0;
+            products.forEach(item => {
+                if(item.price == priceValue){
+                    findValue[count] = item;
+                    count++;
+                }
+            })
+            if(findValue != null){
+                $('.row').html('');
+                EachFor(findValue,'.row');
+            }
+        })
+
+        //되돌리기 버튼
+        $('.revert').click(function(){
+            //화면과 products를 초기화후 다시 삽입
+            $('.row').html('');
+            products = copyProducts;
             EachFor(products,'.row');
         })
 
