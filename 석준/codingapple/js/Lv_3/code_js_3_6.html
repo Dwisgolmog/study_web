@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+
+        function namefind(name_F){
+        
+            var name=['흥민','영희','철수','재석'];
+            // name에서 철수 찾기
+            for(var i =0;i<4;i++){
+                if(name_F==name[i]){
+                    console.log('저요!');
+                }
+            }
+        }
+
+        function ququ(f){
+            for(var i =0;i<10;i++){
+                var result =f*i;
+                console.log(result);
+            }
+        }
+
+        function avg(num,mo){
+            var result=0;
+            for(var i=0;i<num.length;i++){
+                result+=num[i];
+            }
+            var avg_mo=result/num.length;
+            
+            if(avg_mo>mo){
+                var d=avg_mo-mo;
+                console.log('평균보다 ${d}만큼 낮네 재수요');
+            }
+            else if(avg_mo<mo)
+            {
+                var p=mo-avg_mo;
+                console.log(`평균보다 ${p}만큼 높네 ㅊㅋ`);
+            }
+        }
+
+    </script>
+</body>
+</html>
