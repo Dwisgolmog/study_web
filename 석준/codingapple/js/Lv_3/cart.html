@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    $(document).ready(function() {
+      // 로컬 스토리지에서 저장된 항목 불러오기
+      var storedItems = localStorage.getItem('cart');
+      if (storedItems !== null) {
+        var cartItems = JSON.parse(storedItems);
+        console.log(cartItems); // 로그에 불러온 항목 출력 (개발자 도구에서 확인 가능)
+      }
+    });
+  </script>
+</body>
+</html>
