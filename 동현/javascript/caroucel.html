@@ -26,13 +26,13 @@
     <div style="overflow: hidden;">
         <div class="slice-box">
             <div class="box1">
-                <img src="/Users/kimdonghyun/Documents/GitHub/study_web/동현/images/car1.png">
+                <img src="/동현/images/car1.png" draggable="false">
             </div>
             <div class="box1">
-                <img src="/Users/kimdonghyun/Documents/GitHub/study_web/동현/images/car2.png">
+                <img src="/동현/images/car2.png" draggable="false">
             </div>
             <div class="box1">
-                <img src="/Users/kimdonghyun/Documents/GitHub/study_web/동현/images/car3.png">
+                <img src="/동현/images/car3.png" draggable="false">
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
 
         //setInterval를 사용함으로써 자동으로 페이지를 지속적으로 넘기게 하기
         let clock = 0;
-        let time = setInterval(nextPage,4000);
+        //let time = setInterval(nextPage,4000);
         let page = 0;
 
         function nextPage(){
@@ -93,6 +93,38 @@
             $('.slice-box').css('transform','translateX(-200vw)');
             page = 3;
         }
+
+
+        //드래그 이벤트
+        let startpoint = 0;
+        let mousebool = false;
+
+        $('.slice-box').eq(0).on('mousedown',function(e){
+            startpoint = e.clientX
+            mousebool = true;
+        })
+        $('.slice-box').eq(0).on('mouseup',function(e){
+            mousebool = false;
+            if(e.clientX - startpoint <= -100){
+                boxTwo();
+            }else{
+                boxOne();
+            }
+        })
+        $('.slice-box').on('mouseleave',function(e){
+            mousebool = false;
+        })
+        
+        $('.slice-box').eq(0).on('mousemove',function(e){
+            console.log(mousebool);
+            if(mousebool){
+                let range = e.clientX - startpoint;
+                console.log(range);
+                $('.slice-box').css('transform',`translateX(${e.clientX - startpoint}px)`);
+            }
+            
+        })
+
     </script>
 </body>
 </html>

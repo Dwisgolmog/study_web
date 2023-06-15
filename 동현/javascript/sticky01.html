@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postion sticky 사용법</title>
+    <style>
+        .grey{
+            background: lightgrey;
+            height: 2000px;
+            margin-top: 500px;
+        }
+        .image{
+            float: right;
+            width: 60%;
+            /* sticky --> 조건부 fixed임 */
+            position: sticky;
+            top: 100px;
+        }
+        .text{
+            float: left;
+            width: 40%;
+        }
+    </style>
+</head>
+<body style="background: grey; height: 3000px;">
+    <div class="grey">
+        <div class="image">
+            <img src="/동현/images/car1.png" alt="사진" width="100%">
+        </div>
+        <div class="text">
+            HTML stands for HyperText Markup Language. It is a standard markup language for web page creation. It allows the creation and structure of sections, paragraphs, and links using HTML elements (the building blocks of a web page) such as tags and attributes. 
+        </div>
+
+        <div class="text" style="margin-top: 50px;">
+        </div>
+
+        <div class="text" style="margin-top: 100px;">
+            HTML stands for HyperText Markup Language. It is a standard markup language for web page creation. It allows the creation and structure of sections, paragraphs, and links using HTML elements (the building blocks of a web page) such as tags and attributes. 
+        </div>
+    </div>
+    
+</body>
+</html>
