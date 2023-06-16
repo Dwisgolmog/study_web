@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homePage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="homePage.css">
+</head>
+<body>
+
+    <!-- 네비게이션바 생성 -->
+    <nav class="navbar bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+        <div class="container-fluid d-flex justify-content-start">
+          <a class="navbar-brand" href="homPage.html">집꾸미기</a>
+
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">스토어</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">시공견적</a>
+              </li>
+          </ul>
+        </div>
+      </nav>
+    
+
+
+    </div>
+    <!-- 상품 보여주기 -->
+    <div class="container mt-4">
+
+        <!-- 검색 창 -->
+        <input type="text" class="form-control" placeholder="검색어 입력" id="findProducts" onkeyup="if(window.event.keyCode==13){findProudcts()}">
+
+        <!-- 상품 보여주기 -->
+        <div class="row">
+              
+        </div>
+
+      <!-- 장바구니 -->
+      <div class="shoppingCart">
+
+        <div class="container">
+          <h5 style="font-weight: bolder;">장바구니</h5>
+          <div class="dragtab">
+            <h5 style="font-weight: bolder;">여기로 드래그</h5>
+          </div>
+        </div>
+
+      </div>
+            
+    </div>
+
+      
+
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+      <script>
+        //Ajax로 sotre.json파일의 상품정보를 뿌림
+        $.get('/동현/jsonFile/store.json').done(function(data){
+          let newdata = data.products
+          newdata.forEach((data,index) => {
+            const products = `<div class="col-sm-3">
+                                <div class="card mb-3">
+                                  <img src="/동현/images/${data.photo}">
+                                  <div class="card-body">
+                                    <h5>${data.title}</h5>
+                                    <h6 style="color: rgb(160, 158, 158);">${data.brand}</h6>
+                                    <p>가격 : ${data.price}</p>
+                                    <button class="btn btn-dark">담기</button>
+                                  </div>
+                                </div>
+                              </div>`;
+            $('.row').append(products);
+          });
+        })
+      </script>
+      <script src="/동현/javascript/웹개발기능대회예제/findProducts.js"></script>
+</body>
+</html>

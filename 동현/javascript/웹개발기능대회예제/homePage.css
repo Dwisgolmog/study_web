@@ -1,0 +1,23 @@
+body{
+    min-height: 100vh;
+    background-color: rgb(244, 244, 244);
+  }
+  .form-control{
+    margin-bottom: 2%;
+    max-width: 30%;
+  }
+  .shoppingCart{
+    background-color: rgb(226, 226, 226);
+    display: flex;
+    margin: auto;
+    height: 35vh;
+    padding: 3%;
+  }
+  .dragtab{
+    background-color: black;
+    height: 90%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
