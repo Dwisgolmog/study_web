@@ -1,13 +1,23 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended : true}));
+const MongoClient = require('mongodb').MongoClient;
+app.set('view engine','ejs');
+var db;
+//몽고 DB 연결
 
-app.listen(8080,function(){
-    console.log('listening on 8080');
-});
+MongoClient.connect('mongodb+srv://donghyung2000:qwer1234@cluster0.tjqsheh.mongodb.net/',{ useUnifiedTopology: true } ,function(e, client){
+  if (e) return console.log(e);
+    
+  db = client.db('todoapp');
 
-app.get('/pet',function(rq,rp){
-    rp.send('welecome pet!');
+  app.listen(8080, function() {
+    console.log('listening on 8080')
+  })
+
 })
+
 
 app.get('/write',function(rq,rp){
     rp.sendFile(__dirname + '/write.html');
@@ -16,4 +26,49 @@ app.get('/write',function(rq,rp){
 //  => '/' 은 홈페이지
 app.get('/',function(rq,rp){
     rp.sendFile(__dirname + '/index.html');
+})
+
+
+// /add라는 경로로  POST 요청이 왔을경우
+app.post('/add',function(request,response){
+    response.send('전송완료');
+
+    // counter라는 DB에 있는 게시물갯수를 가져옴
+    db.collection('counter').findOne({name : '게시물갯수'},function(e,result){
+        var totalPost = result.totalPost
+
+        //post라는 DB에 응답.name의 값을 저장함
+        db.collection('post').insertOne( {_id: totalPost+1,제목 : request.body.title , 날짜:request.body.date} ,function(e,result){
+            console.log('저장완료');
+
+            // $set ==> 바꿀값 , $inc ==> 기존값에 더해줄 값
+            db.collection('counter').updateOne({name:'게시물갯수'},{ $inc : {totalPost:1}},function(e,result){
+                if(e){return console.log(e)}
+            })
+        });
+
+        
+    })
+
+})
+
+app.get('/list',function(rq,rp){
+
+    // post에 저장된 모든 데이터를 가져올수 있음
+    db.collection('post').find().toArray(function(e,result){
+        console.log(result);
+        //모든 데이터의 값을 posts라는 이름으로 ejs파일에 넣는다.
+        rp.render('list.ejs', {posts : result});
+    });
+
+})
+
+app.delete('/delete',function(rq,rp){
+    console.log(rq.body);
+    rq.body._id = parseInt(rq.body._id);
+    db.collection('post').deleteOne(rq.body,function(e,result){
+        console.log('삭제완료');
+        //서버에 응답 성공(200)이라고 전해줌
+        rp.status(200).send({message : '성공했습니다'});
+    })
 })
