@@ -31,7 +31,8 @@ app.get('/',function(rq,rp){
 
 // /add라는 경로로  POST 요청이 왔을경우
 app.post('/add',function(request,response){
-    response.send('전송완료');
+    //response.send('전송 성공');
+    response.send("<script>alert('전송 성공'); window.location.href = '/write';</script>");
 
     // counter라는 DB에 있는 게시물갯수를 가져옴
     db.collection('counter').findOne({name : '게시물갯수'},function(e,result){
@@ -49,7 +50,6 @@ app.post('/add',function(request,response){
 
         
     })
-
 })
 
 app.get('/list',function(rq,rp){

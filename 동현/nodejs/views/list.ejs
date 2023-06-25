@@ -65,7 +65,7 @@
         }).done(function(result){
           //페이지 새로고침해도 됌
           //버튼을 누른 <li> 요소를 안보이게함
-          this.parent('li').fadeOut();
+          click.parent('li').fadeOut();
         }).fail(function(xhr, 응답코드,에러메세지){
           console.log(응답코드);
           console.log(에러메세지);
