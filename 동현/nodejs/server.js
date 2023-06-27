@@ -72,3 +72,15 @@ app.delete('/delete',function(rq,rp){
         rp.status(200).send({message : '성공했습니다'});
     })
 })
+
+// :id ==> url의 파라미터와 같음
+app.get('/detail/:id',function(req,res){
+    // :id 값과 동일한  post DB의 id를 가져옴
+    db.collection('post').findOne({_id:parseInt(req.params.id)},function(e,result){
+        if(result == null){
+            res.send('존재하지 않는 게시물입니다.');
+        }
+        console.log(result);
+        res.render('detail.ejs',{data : result});
+    })
+})
