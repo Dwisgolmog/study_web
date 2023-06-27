@@ -3,10 +3,19 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended : true}));
 const MongoClient = require('mongodb').MongoClient;
+
+//ejs 사용
 app.set('view engine','ejs');
+
+//npm install method-override 사용
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
+//static 파일을 보관하기 위해 public 폴더를 쓸것임
+app.use('/public',express.static('public'));
+
 var db;
 //몽고 DB 연결
-
 MongoClient.connect('mongodb+srv://donghyung2000:qwer1234@cluster0.tjqsheh.mongodb.net/',{ useUnifiedTopology: true } ,function(e, client){
   if (e) return console.log(e);
     
@@ -20,12 +29,12 @@ MongoClient.connect('mongodb+srv://donghyung2000:qwer1234@cluster0.tjqsheh.mongo
 
 
 app.get('/write',function(rq,rp){
-    rp.sendFile(__dirname + '/write.html');
+    rp.render('write.ejs');
 })
 
 //  => '/' 은 홈페이지
 app.get('/',function(rq,rp){
-    rp.sendFile(__dirname + '/index.html');
+    rp.render('index.ejs');
 })
 
 
@@ -83,4 +92,24 @@ app.get('/detail/:id',function(req,res){
         console.log(result);
         res.render('detail.ejs',{data : result});
     })
+})
+
+app.get('/edit/:id',function(req,res){
+    db.collection('post').findOne({_id:parseInt(req.params.id)},function(e,result){
+        if(result == null){
+            res.send('존재하지 않는 게시물입니다.');
+        }
+        res.render('edit.ejs',{data:result});
+    })
+    
+})
+
+app.put('/edit',function(req,res){
+    db.collection('post').updateOne({_id:parseInt(req.body.id)},
+    {$set:{ 제목:req.body.title,날짜:req.body.date}},function(e,result){
+        console.log("수정 완료");
+        //수정 완료시 /list 페이지로 이동
+        res.redirect('/list');
+    });
+    
 })
