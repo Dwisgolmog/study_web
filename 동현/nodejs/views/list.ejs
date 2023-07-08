@@ -1,63 +1,116 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    
-    <!-- 절대 경로가 아닌 /public으로 시작하여야 함 -->
-    <link rel="stylesheet" href="/public/list.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hello, world!</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-  </head>
+  <!-- 절대 경로가 아닌 /public으로 시작하여야 함 -->
+  <link rel="stylesheet" href="/public/list.css">
+
+  <title>Hello, world!</title>
+
+</head>
 
 
-  <body>
+<body>
 
-    <!-- nav.html 의 파일을 해당위치에 삽입 -->
-    <%- include('nav.html') %>
-    
+  <!-- nav.html 의 파일을 해당위치에 삽입 -->
+  <%- include('nav.html') %>
+
+    <!-- 검색창 -->
+    <div class="container justify-content-center">
+      <div class="input-group m-3 col-lg-11">
+        <input type="text" class="searchValue form-control" placeholder="검색할 제목 입력하기" aria-label="Recipient's username"
+          aria-describedby="button-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" id="search-btn">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 리스트 -->
     <ul class="list-group">
-      <% for(var i =0; i< posts.length; i++){ %>
-      <li class="list-group-item">
-        <p>글번호 : <%= posts[i]._id %></p>
-        <h4><a class="" href="/detail/<%= posts[i]._id %>">할 일 : <%= posts[i].제목 %></a></h4>
-        <p class="lead">할일 마감날짜 : <%= posts[i].날짜 %></p>
-        <!-- 버튼에 data-id 속성을 부여하여 게시물 번호를 구함 -->
-        <button class="delete btn btn-danger" data-id="<%= posts[i]._id %>">delete</button>
-        <button class="edit btn btn-danger" data-id="<%= posts[i]._id %>">Edit</button>
-      </li>
-      <% } %>
+      <% for(var i=0; i< posts.length; i++){ %>
+        <li class="list-group-item">
+          <p>글번호 : <%= posts[i]._id %> 작성자: <%=posts[i].nickName %></p>
+          <h4><a class="" href="/detail/<%= posts[i]._id %>">할 일 : <%= posts[i].제목 %></a></h4>
+          <p class="lead">할일 마감날짜 : <%= posts[i].날짜 %>
+          </p>
+          <!-- 버튼에 data-id 속성을 부여하여 게시물 번호를 구함 -->
+          <button class="delete btn btn-danger" data-id="<%= posts[i]._id %>">delete</button>
+          <button class="edit btn btn-danger" data-id="<%= posts[i]._id %>">Edit</button>
+        </li>
+        <% } %>
     </ul>
-  
+
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script>
+      //$(document).ready() --> 문서가 준비되면 해당 코드를 실행시킴(문서 충돌방지)
+      $(document).ready(() => {
+        $('.delete').click(function (e) {
+          var postnumber = e.target.dataset.id;
+          var click = $(this); //지금 이벤트 동작하는 곳
+          $.ajax({
+            method: 'DELETE',
+            url: '/delete',
+            data: { _id: postnumber }
+          }).done(function (data) {
+            //페이지 새로고침해도 됌
+            //버튼을 누른 <li> 요소를 안보이게함
+            click.parent('li').fadeOut();
+          }).fail(function (xhr, 응답코드, 에러메세지) {
+            if(!xhr.responseJSON.loginCheck){
+              alert('로그인을 해주세요!');
+            }else{
+              alert('자신의 게시물만 삭제 가능합니다!');
+            }
+            
+          });
+        })
 
-      $('.delete').click(function(e){
-        var postnumber = e.target.dataset.id;
-        var click = $(this); //지금 이벤트 동작하는 곳
-        $.ajax({
-          method : 'DELETE',
-          url : '/delete',
-          data : {_id : postnumber}
-        }).done(function(result){
-          //페이지 새로고침해도 됌
-          //버튼을 누른 <li> 요소를 안보이게함
-          click.parent('li').fadeOut();
-        }).fail(function(xhr, 응답코드,에러메세지){
-          console.log(응답코드);
-          console.log(에러메세지);
-        });
+        //search 버튼을 누를시 GET요청
+        $('#search-btn').click(function () {
+          let searchValue = $('.searchValue').val();
+          window.location.replace(`/search?value=${searchValue}`);
+        })
+
+        $('.edit').click((e) =>{
+          $.ajax({
+            method: 'GET',
+            url : `/edit/${e.target.dataset.id}`,
+          })
+          .done((data)=>{
+            consoel.log('wtf');
+          })
+          .fail((xhr)=>{
+            if(xhr.responseJSON.showAlert){
+              alert('로그인을 해주세요');
+            }else if(xhr.responseJSON.loginCheck){
+              alert('자신의 게시물이 아닙니다.',); 
+            }else{
+              console.log('.edit ajax error!!');
+            }
+          })
+          //location.href=`/edit/${e.target.dataset.id}`   
+        })
       })
+
     </script>
-  </body>
+</body>
+
 </html>

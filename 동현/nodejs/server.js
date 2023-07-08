@@ -30,96 +30,6 @@ MongoClient.connect(process.env.DB_URL, { useUnifiedTopology: true }, function (
 
 })
 
-
-app.get('/write', function (rq, rp) {
-    rp.render('write.ejs');
-})
-
-//  => '/' 은 홈페이지
-app.get('/', function (rq, rp) {
-    rp.render('index.ejs');
-})
-
-
-// /add라는 경로로  POST 요청이 왔을경우
-app.post('/add', function (request, response) {
-    //response.send('전송 성공');
-    response.send("<script>alert('전송 성공'); window.location.href = '/write';</script>");
-
-    // counter라는 DB에 있는 게시물갯수를 가져옴
-    db.collection('counter').findOne({ name: '게시물갯수' }, function (e, result) {
-        var totalPost = result.totalPost
-
-        //post라는 DB에 응답.name의 값을 저장함
-        db.collection('post').insertOne({ _id: totalPost + 1, 제목: request.body.title, 날짜: request.body.date }, function (e, result) {
-            console.log('저장완료');
-
-            // $set ==> 바꿀값 , $inc ==> 기존값에 더해줄 값
-            db.collection('counter').updateOne({ name: '게시물갯수' }, { $inc: { totalPost: 1 } }, function (e, result) {
-                if (e) { return console.log(e) }
-            })
-        });
-
-
-    })
-})
-
-app.get('/list', function (rq, rp) {
-
-    // post에 저장된 모든 데이터를 가져올수 있음
-    db.collection('post').find().toArray(function (e, result) {
-        console.log(result);
-        //모든 데이터의 값을 posts라는 이름으로 ejs파일에 넣는다.
-        rp.render('list.ejs', { posts: result });
-    });
-
-})
-
-app.delete('/delete', function (rq, rp) {
-    console.log(rq.body);
-    rq.body._id = parseInt(rq.body._id);
-    db.collection('post').deleteOne(rq.body, function (e, result) {
-        console.log('삭제완료');
-        //서버에 응답 성공(200)이라고 전해줌
-        rp.status(200).send({ message: '성공했습니다' });
-    })
-})
-
-// :id ==> url의 파라미터와 같음
-app.get('/detail/:id', function (req, res) {
-    // :id 값과 동일한  post DB의 id를 가져옴
-    db.collection('post').findOne({ _id: parseInt(req.params.id) }, function (e, result) {
-        if (result == null) {
-            res.send('존재하지 않는 게시물입니다.');
-        }
-        console.log(result);
-        res.render('detail.ejs', { data: result });
-    })
-})
-
-app.get('/edit/:id', function (req, res) {
-    db.collection('post').findOne({ _id: parseInt(req.params.id) }, function (e, result) {
-        if (result == null) {
-            res.send('존재하지 않는 게시물입니다.');
-        }
-        res.render('edit.ejs', { data: result });
-    })
-
-})
-
-app.put('/edit', function (req, res) {
-    db.collection('post').updateOne({ _id: parseInt(req.body.id) },
-        { $set: { 제목: req.body.title, 날짜: req.body.date } }, function (e, result) {
-            console.log("수정 완료");
-            //수정 완료시 /list 페이지로 이동
-            res.redirect('/list');
-        });
-
-})
-
-
-
-
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
@@ -155,6 +65,39 @@ passport.use(new LocalStrategy({
     })
 }));
 
+app.get('/write', function (rq, rp) {
+    rp.render('write.ejs');
+})
+
+//  => '/' 은 홈페이지
+app.get('/', function (rq, rp) {
+    rp.render('index.ejs');
+})
+
+app.get('/list', function (rq, rp) {
+
+    // post에 저장된 모든 데이터를 가져올수 있음
+    db.collection('post').find().toArray(function (e, result) {
+        console.log(result);
+        //모든 데이터의 값을 posts라는 이름으로 ejs파일에 넣는다.
+        rp.render('list.ejs', { posts: result });
+    });
+
+})
+
+// :id ==> url의 파라미터와 같음
+app.get('/detail/:id', function (req, res) {
+    // :id 값과 동일한  post DB의 id를 가져옴
+    db.collection('post').findOne({ _id: parseInt(req.params.id) }, function (e, result) {
+        if (result == null) {
+            res.send('존재하지 않는 게시물입니다.');
+        }
+        console.log(result);
+        res.render('detail.ejs', { data: result });
+    })
+})
+
+
 app.get('/login', function (req, res) {
     res.render('login.ejs');
 })
@@ -174,7 +117,9 @@ function loginCheck(req, res, next) {
     if (req.user) {
         next();  //user가 있으면 통과
     } else {
-        res.send('You not login!'); //user가 없으면 메세지 출력
+        console.log(req.user);
+        console.log('loginCheck 오류발생!');
+        return res.status(400).send({ message: '로그인을 해주세요!',showAlert:true}); //user가 없으면 메세지 출력
     }
 }
 
@@ -198,7 +143,7 @@ app.get('/signup', function (req, res) {
 app.post('/signUp', function (req, res) {
     //아이디 중복확인
     db.collection('login').findOne({ email: req.body.email }, function (e, result) {
-        //중복이 아닐시
+        //중복일시
         if (result != null) {
             //아이디가 중복임을 알리고 회원가입 다시하기
             res.send("<script>alert('아이디가 중복입니다! 다시 시도해주세요.'); window.location.href = '/signUp';</script>");
@@ -231,3 +176,104 @@ function hashTest(salt,password) {
 
     return crypto.pbkdf2Sync(password, salt, 1, 32, 'sha512').toString('hex')
 }
+
+//검색한 내용을 찾아서 보여줌
+//{$text:{$search: req.query.value}} --> 몽고db의 text index
+//글자 두개 단위로 indexing 하는 방법 --> nGram
+app.get('/search', (req,res) => {
+
+    var 검색조건 = [
+        {
+          $search: {
+            index: 'titleSearch',
+            text: {
+              query: req.query.value,
+              path: ['제목','날짜']  // 제목날짜 둘다 찾을 수 있음
+            }
+          }
+        },
+
+        // { $sort : { _id : 1 } },  //결과를 오름찬수으로 정렬(-1일시 내림차순)
+        // { $limit : 10 },          //결과를 위에서 10개만 가져옴
+        // { $project : { 제목 : 1, _id : 0 } }  //원하는 항목만을 보여줌
+
+    ] 
+    //agrregate --> 검색조건을 여러개 넣을 수 있음
+    db.collection('post').aggregate(검색조건).toArray((e,result) =>{
+        console.log(result);
+        res.render('search.ejs',{posts:result});        
+    })
+})
+
+// /add라는 경로로  POST 요청이 왔을경우
+app.post('/add', function (request, response) {
+    //response.send('전송 성공');
+    response.send("<script>alert('전송 성공'); window.location.href = '/write';</script>");
+
+    // counter라는 DB에 있는 게시물갯수를 가져옴
+    db.collection('counter').findOne({ name: '게시물갯수' }, function (e, result) {
+        var totalPost = result.totalPost
+        var postInformation = { _id: totalPost + 1,작성자:request.user._id ,제목: request.body.title, 날짜: request.body.date , date: new Date(),nickName: request.user.name}
+        //post라는 DB에 응답.name의 값을 저장함
+        db.collection('post').insertOne(postInformation, function (e, result) {
+            console.log('저장완료');
+
+            // $set ==> 바꿀값 , $inc ==> 기존값에 더해줄 값
+            db.collection('counter').updateOne({ name: '게시물갯수' }, { $inc: { totalPost: 1 } }, function (e, result) {
+                if (e) { return console.log(e) }
+            })
+        });
+
+
+    })
+})
+
+//게시물 삭제
+app.delete('/delete',loginCheck ,function (rq, rp) {
+    console.log("rq.body._id:"+rq.body._id);
+
+    rq.body._id = parseInt(rq.body._id);
+
+    //게시물 작성자의 아이디와 로그인 유저의 아이디와 동일 && 삭제버튼을 누른 게시물의 _id와 동일한 게시물 삭제
+    db.collection('post').deleteOne({ _id: rq.body._id, 작성자: rq.user._id }, function (e, result) {
+        //삭제된 게시물이 없을경우
+        if (result.deletedCount == 0) {
+            console.log('조건에 맞는 문서가 없습니다.');
+            rp.status(400).send({ message: '조건에 맞는 문서가 없습니다.', loginCheck:true });
+        } else {
+            console.log('삭제완료');
+            //서버에 응답 성공(200)이라고 전해줌
+            rp.status(200).send({ message: '성공했습니다'});
+        }
+    })
+
+})
+
+
+app.get('/edit/:id',loginCheck ,function (req, res) {
+   
+    db.collection('post').findOne({ _id: parseInt(req.params.id),작성자:req.user._id }, function (e, result) {
+        if (result == null) {
+            res.send('존재하지 않는 게시물입니다.');
+        }
+
+        if(result.getModifiledCount == 0){
+            console.log('edit:조건에 맞는 문서가 없습니다.');
+            rp.status(400).send({ message: '조건에 맞는 문서가 없습니다.', loginCheck:true });
+        }
+        res.render('edit.ejs', { data: result });
+    })
+
+})
+
+//수정할때 로그인한 유저의 게시물만을 수정하게 함
+app.put('/edit',loginCheck ,function (req, res) {
+    
+    db.collection('post').updateOne({ _id: parseInt(req.body.id),작성자:req.user._id },
+        { $set: { 제목: req.body.title, 날짜: req.body.date } }, function (e, result) {
+            console.log("수정 완료");
+            //수정 완료시 /list 페이지로 이동
+            res.redirect('/list');
+        });
+
+})
