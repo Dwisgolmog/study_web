@@ -61,6 +61,8 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script>
       //$(document).ready() --> 문서가 준비되면 해당 코드를 실행시킴(문서 충돌방지)
+
+      //delete 버튼을 눌렀을때
       $(document).ready(() => {
         $('.delete').click(function (e) {
           var postnumber = e.target.dataset.id;
@@ -89,24 +91,26 @@
           window.location.replace(`/search?value=${searchValue}`);
         })
 
-        $('.edit').click((e) =>{
+        //edit 버튼을 눌렀을때
+        $('.edit').click((e) => {
           $.ajax({
             method: 'GET',
-            url : `/edit/${e.target.dataset.id}`,
+            url: `/edit/${e.target.dataset.id}`,
           })
-          .done((data)=>{
-            consoel.log('wtf');
-          })
-          .fail((xhr)=>{
-            if(xhr.responseJSON.showAlert){
-              alert('로그인을 해주세요');
-            }else if(xhr.responseJSON.loginCheck){
-              alert('자신의 게시물이 아닙니다.',); 
-            }else{
-              console.log('.edit ajax error!!');
-            }
-          })
-          //location.href=`/edit/${e.target.dataset.id}`   
+            .done((data) => {
+              location.href = `/edit/${e.target.dataset.id}`;
+            })
+            .fail((xhr) => {
+              if(xhr.status == 400){
+                if(xhr.responseJSON.showAlert){
+                  alert('로그인을 해주세요');
+                }else{
+                  alert('자신의 게시물만 수정할 수 있습니다.');
+                }
+              }else{
+                console.log('.edit ajax error!!' + xhr.status);
+              }
+            })
         })
       })
 

@@ -65,6 +65,46 @@ passport.use(new LocalStrategy({
     })
 }));
 
+//암호화 해주는 함수
+function hashTest(salt,password) {
+    //salt에 null값이 들어왔을때는 회원가입으로 간주하고 salt값 생성
+    if(salt == null){
+        const pwInformation = [];
+        //salt를 생성해서 db에 저장
+        const salt = crypto.randomBytes(32).toString('hex')
+        pwInformation.push(salt);
+        pwInformation.push(crypto.pbkdf2Sync(password, salt, 1, 32, 'sha512').toString('hex'));
+        return pwInformation;
+    }
+
+    return crypto.pbkdf2Sync(password, salt, 1, 32, 'sha512').toString('hex')
+}
+
+
+//미들웨어 검사 함수
+function loginCheck(req, res, next) {
+    if (req.user) {
+        next();  //user가 있으면 통과
+    } else {
+        console.log(req.user);
+        console.log('loginCheck 오류발생!');
+        return res.status(400).send({ message: '로그인을 해주세요!',showAlert:true}); //user가 없으면 메세지 출력
+    }
+}
+
+//유저의 id 데이터로 세션데이터 만들어줌 -->세션데이터아이디를 쿠키로 만들어 브라우저로 보내줌
+passport.serializeUser(function (user, done) {
+    done(null, user.email)
+});
+
+// 마이페이지 접속시 실행되는 함수
+// 로그인한 사용자의 정보를 넘겨줌
+passport.deserializeUser(function (아이디, done) {
+    db.collection('login').findOne({ email: 아이디 }, function (e, result) {
+        done(null, result)
+    })
+});
+
 app.get('/write', function (rq, rp) {
     rp.render('write.ejs');
 })
@@ -112,70 +152,9 @@ app.get('/mypage', loginCheck, function (req, res) {
     res.render('myPage.ejs', { user: req.user });
 })
 
-//미들웨어 검사 함수
-function loginCheck(req, res, next) {
-    if (req.user) {
-        next();  //user가 있으면 통과
-    } else {
-        console.log(req.user);
-        console.log('loginCheck 오류발생!');
-        return res.status(400).send({ message: '로그인을 해주세요!',showAlert:true}); //user가 없으면 메세지 출력
-    }
-}
-
-//유저의 id 데이터로 세션데이터 만들어줌 -->세션데이터아이디를 쿠키로 만들어 브라우저로 보내줌
-passport.serializeUser(function (user, done) {
-    done(null, user.email)
-});
-
-// 마이페이지 접속시 실행되는 함수
-// 로그인한 사용자의 정보를 넘겨줌
-passport.deserializeUser(function (아이디, done) {
-    db.collection('login').findOne({ email: 아이디 }, function (e, result) {
-        done(null, result)
-    })
-});
-
 app.get('/signup', function (req, res) {
     res.render('signUp.ejs');
 })
-
-app.post('/signUp', function (req, res) {
-    //아이디 중복확인
-    db.collection('login').findOne({ email: req.body.email }, function (e, result) {
-        //중복일시
-        if (result != null) {
-            //아이디가 중복임을 알리고 회원가입 다시하기
-            res.send("<script>alert('아이디가 중복입니다! 다시 시도해주세요.'); window.location.href = '/signUp';</script>");
-        } else { //중복이 아닐시
-            //비밀번호 암호화
-            const pwInformation = hashTest(null,req.body.pw);            
-            //회원가입창에 있는 내용을 DB에 저장
-            db.collection('login').insertOne({ email: req.body.email,salt:pwInformation[0] ,pw: pwInformation[1], ad1: req.body.ad1, ad2: req.body.ad2, name: req.body.name }, function (e, result) {
-                if (e) console.log(`error!!:${e}`);
-            })
-
-            //회원가입 성공시 alert창과 함께 로그인 페이지로 이동
-            res.send("<script>alert('회원 가입 성공!'); window.location.href = '/login';</script>");  
-
-        }
-    })
-})
-
-//암호화 해주는 함수
-function hashTest(salt,password) {
-    //salt에 null값이 들어왔을때는 회원가입으로 간주하고 salt값 생성
-    if(salt == null){
-        const pwInformation = [];
-        //salt를 생성해서 db에 저장
-        const salt = crypto.randomBytes(32).toString('hex')
-        pwInformation.push(salt);
-        pwInformation.push(crypto.pbkdf2Sync(password, salt, 1, 32, 'sha512').toString('hex'));
-        return pwInformation;
-    }
-
-    return crypto.pbkdf2Sync(password, salt, 1, 32, 'sha512').toString('hex')
-}
 
 //검색한 내용을 찾아서 보여줌
 //{$text:{$search: req.query.value}} --> 몽고db의 text index
@@ -202,6 +181,59 @@ app.get('/search', (req,res) => {
     db.collection('post').aggregate(검색조건).toArray((e,result) =>{
         console.log(result);
         res.render('search.ejs',{posts:result});        
+    })
+})
+
+app.get('/edit/:id', loginCheck, function (req, res) {
+
+    db.collection('post').findOne({ _id: parseInt(req.params.id), 작성자: req.user._id }, function (e, result) {
+        if (e) {
+            console.log('edit get 요청 오류 발생!');
+            res.status(500).send('서버 오류 발생');
+        } else {
+            if (result == null) {
+                console.log('edit 조건에 맞는 문서가 없습니다');
+                res.status(400).send({ message: '조건에 맞는 문서가 없습니다.', loginCheck: true });
+            } else {
+                res.render('edit.ejs', { data: result, loginCheck: false, showAlert: false });
+            }
+        }
+    });
+
+})
+
+app.get('/upload',(req,res) =>{
+    res.render('upload.ejs');
+})
+
+//이미지는 db보다는 일반하드에 저장하는게 쌈
+
+
+// app.use -->전역 미들웨어 (모든 요청과 응답사이에 발생함) 
+// /shop 으로 접속을 요청하면 shop.js 라우터를 사용하겠다
+app.use('/shop',loginCheck,require('./routes/shop.js'));
+
+app.use('/board/sub',require('./routes/board'));
+
+app.post('/signUp', function (req, res) {
+    //아이디 중복확인
+    db.collection('login').findOne({ email: req.body.email }, function (e, result) {
+        //중복일시
+        if (result != null) {
+            //아이디가 중복임을 알리고 회원가입 다시하기
+            res.send("<script>alert('아이디가 중복입니다! 다시 시도해주세요.'); window.location.href = '/signUp';</script>");
+        } else { //중복이 아닐시
+            //비밀번호 암호화
+            const pwInformation = hashTest(null,req.body.pw);            
+            //회원가입창에 있는 내용을 DB에 저장
+            db.collection('login').insertOne({ email: req.body.email,salt:pwInformation[0] ,pw: pwInformation[1], ad1: req.body.ad1, ad2: req.body.ad2, name: req.body.name }, function (e, result) {
+                if (e) console.log(`error!!:${e}`);
+            })
+
+            //회원가입 성공시 alert창과 함께 로그인 페이지로 이동
+            res.send("<script>alert('회원 가입 성공!'); window.location.href = '/login';</script>");  
+
+        }
     })
 })
 
@@ -249,23 +281,6 @@ app.delete('/delete',loginCheck ,function (rq, rp) {
 
 })
 
-
-app.get('/edit/:id',loginCheck ,function (req, res) {
-   
-    db.collection('post').findOne({ _id: parseInt(req.params.id),작성자:req.user._id }, function (e, result) {
-        if (result == null) {
-            res.send('존재하지 않는 게시물입니다.');
-        }
-
-        if(result.getModifiledCount == 0){
-            console.log('edit:조건에 맞는 문서가 없습니다.');
-            rp.status(400).send({ message: '조건에 맞는 문서가 없습니다.', loginCheck:true });
-        }
-        res.render('edit.ejs', { data: result });
-    })
-
-})
-
 //수정할때 로그인한 유저의 게시물만을 수정하게 함
 app.put('/edit',loginCheck ,function (req, res) {
     
@@ -276,4 +291,10 @@ app.put('/edit',loginCheck ,function (req, res) {
             res.redirect('/list');
         });
 
+})
+
+//이미지 업로드를 위해 multer 라이브러리 사용 npm install multer
+let multer = require('multer');
+var storage = multer.diskStorage({
+    //해당 부분부터 다시시작
 })
