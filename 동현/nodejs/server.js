@@ -213,7 +213,7 @@ app.get('/chat',loginCheck,(req,res) =>{
     db.collection('chatroom').find({member: req.user._id}).toArray((e,result)=>{
         console.log("user_id ==>"+req.user._id);
         console.log(result);
-        res.render(__dirname+'/mdbootstrap/views/chat.ejs',{chat:result});
+        res.render('chat.ejs',{chat:result});
     })
 
 })
