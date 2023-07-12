@@ -17,6 +17,8 @@ app.use(methodOverride('_method'));
 //static 파일을 보관하기 위해 public 폴더를 쓸것임
 app.use('/public', express.static('public'));
 
+app.use(express.static(__dirname + '/mdbootstrap'));
+
 var db;
 //몽고 DB 연결
 MongoClient.connect(process.env.DB_URL, { useUnifiedTopology: true }, function (e, client) {
@@ -206,8 +208,56 @@ app.get('/upload',(req,res) =>{
     res.render('upload.ejs');
 })
 
-//이미지는 db보다는 일반하드에 저장하는게 쌈
+app.get('/chat',loginCheck,(req,res) =>{
+    
+    db.collection('chatroom').find({member: req.user._id}).toArray((e,result)=>{
+        console.log("user_id ==>"+req.user._id);
+        console.log(result);
+        res.render(__dirname+'/mdbootstrap/views/chat.ejs',{chat:result});
+    })
 
+})
+
+//Chatting 버튼을 클릭시 chatroom collection에 해당 게시물 작성자와 누른 사용자의 아이디가 저장됌
+app.get('/chat/:id', loginCheck, (req, res) => {
+    var postTitle;
+    var member = [req.user._id]; //첫번째 배열에 누른 사용자
+
+    console.log('This is /chat/' + req.params.id);
+
+    db.collection('post').findOne({ _id: parseInt(req.params.id) }, function (e, result) {       
+        if (e) {
+            console.log("get chat error! ==> findOne post")
+            res.send('get chat error! ==> findOne post');
+        } else {
+            var postTitle = result ? result.제목 : null;
+            if (postTitle) {
+                member.push(result.작성자); //두번째 배열에 게시물 작성자
+    
+                db.collection('chatroom').insertOne({ member: member, date: new Date(), title: postTitle }, (e, result) => {
+                    if (e) {
+                        console.log('Error creating chat room!');
+                        res.send('Error creating chat room!');
+                    } else {
+                        console.log('성공적 저장!');
+                        res.send('Create ChatRoom!');
+                    }
+                });
+            } else {
+                console.log('Post not found!');
+                res.send('Post not found!');
+            }
+        }
+    });
+})
+
+app.get('/chatting/:id',loginCheck,(req,res)=>{
+    db.collection('chatroom').find({member: req.user._id}).toArray((e,chat)=>{
+        db.collection('chat').findOne({id:req.params.id}).then((e,result) =>{
+            res.render(__dirname+'/mdbootstrap/views/chatting.ejs',{data:result,chat:chat});
+        })        
+    }) 
+})
 
 // app.use -->전역 미들웨어 (모든 요청과 응답사이에 발생함) 
 // /shop 으로 접속을 요청하면 shop.js 라우터를 사용하겠다
@@ -295,6 +345,40 @@ app.put('/edit',loginCheck ,function (req, res) {
 
 //이미지 업로드를 위해 multer 라이브러리 사용 npm install multer
 let multer = require('multer');
+//disk에다가 저장함(비휘발성)
 var storage = multer.diskStorage({
-    //해당 부분부터 다시시작
+    destination : function(req,file,cb){ //아래의 경로로 이미지를 저장함
+        cb(null,'./public/image') 
+    },
+
+    filename : function(req,file,cb){  //파일 이름 지정
+        cb(null,file.originalname) //기본파일명으로 지정
+    },
+
+    fileFilter: function (req, file, callback) { //확장자가 png,jpg,jpeg 로만 받을 수 있게함
+        var ext = path.extname(file.originalname);
+        if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+            return callback(new Error('PNG, JPG만 업로드하세요'))
+        }
+        callback(null, true)
+    },
+})
+
+//multer를 이용해서 이미지 하드에 저장하기
+var upload = multer({storage: storage});
+
+//이미지를 위에 multer를 미들웨어로 실행하여 저장
+//single 안에는 input의 name값을 입력
+//여러 이미지 파일을 받을려면 .array('input name값',10(받을 갯수))  --> html 코드도 여러개 받을 수 있게 수정
+app.post('/upload',upload.single('profile'),function(req,res){
+    res.send('upload 전송완료');
+})
+
+//이미지 보여주도록함
+app.get('/image/:imageName',function(req,res){
+    res.sendFile(__dirname+'/public/image/' + req.params.imageName);
+})
+
+app.post('sendMessage',(req,res) =>{
+
 })

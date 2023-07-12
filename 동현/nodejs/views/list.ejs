@@ -45,6 +45,7 @@
           <!-- 버튼에 data-id 속성을 부여하여 게시물 번호를 구함 -->
           <button class="delete btn btn-danger" data-id="<%= posts[i]._id %>">delete</button>
           <button class="edit btn btn-danger" data-id="<%= posts[i]._id %>">Edit</button>
+          <button class="chat btn btn-danger" data-id="<%= posts[i]._id %>">Chatting</button>
         </li>
         <% } %>
     </ul>
@@ -62,7 +63,7 @@
     <script>
       //$(document).ready() --> 문서가 준비되면 해당 코드를 실행시킴(문서 충돌방지)
 
-      //delete 버튼을 눌렀을때
+      //delete 버튼을 눌렀을때 DELETE 요청
       $(document).ready(() => {
         $('.delete').click(function (e) {
           var postnumber = e.target.dataset.id;
@@ -114,6 +115,19 @@
         })
       })
 
+      $('.chat').click((e)=>{
+        $.ajax({
+          method: 'GET',
+          url:`/chat/${e.target.dataset.id}`
+        }) 
+        .done(()=>{
+          console.log('sucess');
+        })
+        .fail((xhr,응답코드,에러메세지)=>{
+          console.log('chat POST error!!');
+          console.log(에러메세지);
+        })
+      })
     </script>
 </body>
 
