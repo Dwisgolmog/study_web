@@ -17,8 +17,6 @@ app.use(methodOverride('_method'));
 //static 파일을 보관하기 위해 public 폴더를 쓸것임
 app.use('/public', express.static('public'));
 
-app.use(express.static(__dirname + '/mdb-ui-kit'));
-
 var db;
 //몽고 DB 연결
 MongoClient.connect(process.env.DB_URL, { useUnifiedTopology: true }, function (e, client) {
@@ -213,7 +211,7 @@ app.get('/chat',loginCheck,(req,res) =>{
     db.collection('chatroom').find({member: req.user._id}).toArray((e,result)=>{
         console.log("user_id ==>"+req.user._id);
         console.log(result);
-        res.render(__dirname+'/mdb-ui-kit/views/chat.ejs',{chat:result});
+        res.render('chat.ejs',{chat:result});
     })
 
 })
@@ -254,7 +252,7 @@ app.get('/chat/:id', loginCheck, (req, res) => {
 app.get('/chatting/:id',loginCheck,(req,res)=>{
     db.collection('chatroom').find({member: req.user._id}).toArray((e,chat)=>{
         db.collection('chat').findOne({id:req.params.id}).then((e,result) =>{
-            res.render(__dirname+'/mdb-ui-kit/views/chatting.ejs',{data:result,chat:chat});
+            res.render('chatting.ejs',{data:result,chat:chat});
         })        
     }) 
 })
