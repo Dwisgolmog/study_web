@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .grey {
+      background: lightgrey;
+      height: 2000px;
+      margin-top: 500px;
+    }
+    .text {
+      float: left;
+      width : 300px;
+    }
+/* position: sticky 스크롤이 되어서 이요소가 화면에 나오면 고정시킴 */
+/* 부모 박스를 넘어서 스크롤 되면 이미지도 같이 사라짐 */
+    .image {
+      float: right;
+      width : 400px;
+      position: sticky;
+      top: 100px;
+    }
+  </style>
+</head>
+<body style="background: grey; height: 3000px;" >
+  <div class="grey">
+    <div class="image">
+      <img src="image/곽지창.png" width="100%">
+    </div>
+  
+    <div style="clear : both"></div>
+    <div class="text">Meet the first Triple Camera System</div>
+      
+  </div>
+  
+</body>
+</html>

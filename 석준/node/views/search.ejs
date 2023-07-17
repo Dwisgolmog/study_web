@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/public/main.css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    
+    <%-include('nav.html')%>
+
+    <h4 class="ml-2 my-3" >server에서 가져온 list</h4>
+    <div class="container input-group mb-2">
+      <input class="form-control" id="search-input">
+      <button class="input-group-append btn btn-danger" id="search">검색</button>
+    </div>
+
+    <div class="container">
+      <ul class="list-group">
+        <% for( var i=0; i<posts.length ;i++){ %>
+        <li class="list-group-item">
+          <p>글번호 : <%=posts[i]._id%></p>
+          <h4> 할일 제목 : <%=posts[i].제목  %> </h4>
+          <p> 할일 마감날짜 : <%=posts[i].날짜  %> </p>
+          <button class="btn btn-danger delete" data-id="<%=posts[i]._id%>">삭제</button>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+
+    <!-- //ajax 통신없이 새로고침 가능 -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+      $('.delete').click(function(e){
+        var num = e.target.dataset.id;// 누른 요소의 data-id
+        var nowClick = $(this);
+        //ajax 기본 문법
+        $.ajax({
+        method : 'DELETE',
+        url : '/delete',
+        data : {_id : num}
+        }).done(function(결과){
+          //요청 성공시 실행
+          console.log('성공했어염')
+          nowClick.parent('li').fadeOut();
+        }),fail(function(xhr,textStatus,errorThrown){
+          console.log(xhr,textStatus,errorThrown)
+        })
+      })
+      //검색버튼 누르면 get요청
+
+      $('#search').click(function(){
+        var result=$('#search-input').val()
+        window.location.replace('/search?value='+result)
+      })
+      
+      // var 자료 ={이름 : '값', 이름2 : '값2'}
+      // $.param(자료)
+
+      // $(폼태그).serialize()
+
+    </script>
+
+  </body>
+</html>

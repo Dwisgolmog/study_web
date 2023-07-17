@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <title>Document</title>
+  <style>
+    /* vw단위는 브라우저 폭에 비례 합니다 */
+    .slide-container{
+        width: 300vw;
+        /* transition은 부드럽게 이동하게 합니다 */
+        
+    }
+    .slide{
+        width: 100vw;
+        /* 왼쪽으로 */
+        float: left;
+    }
+    .slide img{
+        width: 300px;
+        height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div style="overflow: hidden">
+    <div class="slide-container" id="sc">
+        <div class="slide">
+            <img src="/석준/codingapple/image/곽지창.png" alt="충청의 왕">
+        </div>
+        <div class="slide">
+            <img src="/석준/codingapple/image/마태수.png" alt="안산의 왕">
+        </div>
+        <div class="slide">
+            <img src="/석준/codingapple/image/석두.jpeg" alt="수원의 왕">
+        </div>
+    </div>
+  </div>
+
+  <script>
+    let x = 0;
+    let touch = false;
+    let currentSlide = 0;
+
+    $('.slide-container').on('mousedown', function(e) {
+      x = e.clientX
+      touch = true;
+    });
+
+    $('.slide-container').on('mousemove', function(e) {
+      if (!touch) return;
+      let moveX = e.clientX
+      let distance = moveX - x;
+
+      $('.slide-container').css('transform', `translateX(${distance}px)`);
+    });
+
+    $('.slide-container').on('mouseup', function(e) {
+      touch = false;
+      let moveX = e.clientX
+      let distance = moveX - x;
+
+      if (distance < -100 && currentSlide < 2) {
+        currentSlide++;
+      } else if (distance > 100 && currentSlide > 0) {
+        currentSlide--;
+      }
+
+      let slideWidth = $('.slide').width();
+      let moveDistance = -currentSlide * slideWidth;
+
+      $('.slide-container').css('transition', 'transform 0.5s').css('transform', `translateX(${moveDistance}px)`);
+
+      setTimeout(() => {
+        $('.slide-container').css('transition', 'none');
+      }, 500);
+    });
+  </script> 
+</body>
+</html>
