@@ -7,6 +7,9 @@ const MongoClient = require('mongodb').MongoClient;
 const crypto = require('crypto')
 require('dotenv').config();
 
+//objectId로 형변환 하기 위한 자료형
+const { ObjectId } = require('mongodb');
+
 //ejs 사용
 app.set('view engine', 'ejs');
 
@@ -251,8 +254,8 @@ app.get('/chat/:id', loginCheck, (req, res) => {
 
 app.get('/chatting/:id',loginCheck,(req,res)=>{
     db.collection('chatroom').find({member: req.user._id}).toArray((e,chat)=>{
-        db.collection('chat').findOne({id:req.params.id}).then((e,result) =>{
-            res.render('chatting.ejs',{data:result,chat:chat});
+        db.collection('chat').find({parentId:req.params.id}).toArray((e,result) =>{
+            res.render('chatting.ejs',{message:result,chat:chat,user:req.user._id});
         })        
     }) 
 })
@@ -377,6 +380,16 @@ app.get('/image/:imageName',function(req,res){
     res.sendFile(__dirname+'/public/image/' + req.params.imageName);
 })
 
-app.post('sendMessage',(req,res) =>{
+app.post('/sendMessage',(req,res) =>{
+    
+    //요청을 보낸 url을 가져와 마지막 / 에 있는 Id값 추출
+    const clientUrl = req.get('Referer');
+    const parsedUrl = new URL(clientUrl);
+    const postId = parsedUrl.pathname.split('/').pop();
 
+
+    db.collection('chat').insertOne({ parentId: postId, userId: req.user._id, message: req.body.message, date: new Date() }).then((e, result) => {
+        if (e) console.log('error chat!!');
+    })
+    res.redirect(`/chatting/${postId}`);
 })

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Material Design for Bootstrap</title>
+    <title>소통방</title>
     
     <!-- Font Awesome -->
     <link
@@ -21,9 +21,9 @@
 
     <link rel="stylesheet" href="../public/css/chat.css">
   </head>
-  <body>
+  <body class="gradient-custom">
     <!-- Start your project here-->
-    <section class="gradient-custom" style="height: 45rem;">
+    <section>
       <div class="container py-5">
     
         <div class="row">
@@ -35,7 +35,7 @@
             <div class="card mask-custom">
               <div class="card-body">
     
-                <ul class="list-unstyled mb-0">
+                <ul class="list-unstyled mb-0" style="overflow-y: scroll; height: 70vh;">
                   <!-- 숫자대신 체크박스 -->
                   <!-- <span class="text-white float-end"><i class="fas fa-check" aria-hidden="true"></i></span> -->
                   <!-- 시작 -->
@@ -46,8 +46,8 @@
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp" alt="avatar"
                           class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60">
                         <div class="pt-1">
-                          <p class="fw-bold mb-0 nickname"><%= chat[i].member[1] %></p>
-                          <p class="small text-white"><%= chat[i].title %></p>
+                          <p class="small text-white" style="display: none;"><%= chat[i].member[1] %></p>
+                          <p class="fw-bold mb-0 nickname"><%= chat[i].title %></p>
                         </div>
                       </div>
                       <div class="pt-1">
@@ -66,58 +66,62 @@
           </div>
     
           <div class="col-md-6 col-lg-7 col-xl-7">
-    
-            <ul class="list-unstyled text-white">
+            <ul class="list-unstyled text-white" style="overflow-y: scroll; height: 60vh;" id="messageList">
               <!-- 시작 -->
-              <li class="d-flex justify-content-between mb-4">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"
-                  class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
-                <div class="card mask-custom">
-                  <div class="card-header d-flex justify-content-between p-3"
-                    style="border-bottom: 1px solid rgba(255,255,255,.3);">
-                    <p class="fw-bold mb-0">Brad Pitt</p>
-                    <p class="text-light small mb-0"><i class="far fa-clock"></i> 12 mins ago</p>
-                  </div>
-                  <div class="card-body">
-                    <p class="mb-0">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li class="d-flex justify-content-between mb-4">
-                <div class="card mask-custom w-100">
-                  <div class="card-header d-flex justify-content-between p-3"
-                    style="border-bottom: 1px solid rgba(255,255,255,.3);">
-                    <p class="fw-bold mb-0">Lara Croft</p>
-                    <p class="text-light small mb-0"><i class="far fa-clock"></i> 13 mins ago</p>
-                  </div>
-                  <div class="card-body">
-                    <p class="mb-0">
-                      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                      laudantium.
-                    </p>
-                  </div>
-                </div>
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar"
-                  class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60">
-              </li>
-              <!-- 끝 -->
-              <form action="/sendMessage" method="POST" >
-                <li class="mb-3">
-                  <div class="form-outline form-white">
-                    <textarea class="form-control" id="textAreaExample3" rows="4" name="message"></textarea>
-                    <label class="form-label" for="textAreaExample3">Message</label>
-                  </div>
-                </li>
-                <button type="submit" class="btn btn-light btn-lg btn-rounded float-end">Send</button>  
-              </form>
+              <% if(message !=null) { %>
+                <% for(var i=0; i<message.length; i++) { %>
+                  <% if(JSON.stringify(message[i].userId)==JSON.stringify(user)) { %>
+                    <li class="d-flex justify-content-start mb-4">
+                      <img src="../public/image/손석구.jpeg" alt="avatar"
+                        class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
+                      <div class="card mask-custom w-100">
+                        <div class="card-header d-flex justify-content-between p-3"
+                          style="border-bottom: 1px solid rgba(255,255,255,.3);">
+                          <p class="fw-bold mb-0">윤주한</p>
+                          <p class="text-light small mb-0"><i class="far fa-clock"></i> 12 mins ago</p>
+                        </div>
+                        <div class="card-body">
+                          <p class="mb-0">
+                            <%= message[i].message %>
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+            
+            
+            
+                  <%} else if(JSON.stringify(message[i].userId) !=JSON.stringify(user)) { %>
+                    <li class="d-flex justify-content-between mb-4">
+                      <div class="card mask-custom w-100">
+                        <div class="card-header d-flex justify-content-between p-3"
+                          style="border-bottom: 1px solid rgba(255,255,255,.3);">
+                          <p class="fw-bold mb-0">Lara Croft</p>
+                          <p class="text-light small mb-0"><i class="far fa-clock"></i> 13 mins ago</p>
+                        </div>
+                        <div class="card-body">
+                          <p class="mb-0" style="min-width: 50%; width: auto;">
+                            <%= message[i].message %>
+                          </p>
+                        </div>
+                      </div>
+                      <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar"
+                        class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60">
+                    </li>
+                  <% } %>
+                <% } %>
+              <% } %>
+            <!-- 끝 -->
             </ul>
-    
+
+            <form action="/sendMessage" method="POST">
+              <div class="form-outline form-white mb-3">
+                <textarea class="form-control" id="textAreaExample3" rows="4" name="message"></textarea>
+                <label class="form-label" for="textAreaExample3">Message</label>
+              </div>
+              <button type="submit" class="btn btn-light btn-lg btn-rounded float-end">Send</button>
+            </form>
           </div>
-    
+
         </div>
     
       </div>
@@ -130,7 +134,9 @@
     <script type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script>
-    
+      //메세지 스크롤을 맨아래로 위치시키게 함
+      var messageList = document.getElementById('messageList');
+      messageList.scrollTop = messageList.scrollHeight;
     </script>
   </body>
 </html>
