@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #3d4e56fa;
+      display: flex;
+    }
+
+    button {
+      width: 70px;
+      height: 70px;
+      border: none;
+      border-radius: 8px;
+      margin: 12px;
+      cursor: move;
+      font-size: 30px;
+      background: #eaeaea4f;
+    }
+
+    .container {
+      margin: 10px;
+      padding: 10px;
+      background-color: #b5c1dc57;
+      border-radius: 8px;
+    }
+
+    .draggable.dragging {
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="draggable" draggable="true">🦊</button>
+    <button class="draggable" draggable="true">🐸</button>
+  </div>
+  <div class="container">
+    <button class="draggable" draggable="true">🐶</button>
+    <button class="draggable" draggable="true">🐱</button>
+  </div>
+  <script>
+    const draggables = document.querySelectorAll(".draggable");
+const containers = document.querySelectorAll(".container");
+
+draggables.forEach(draggable => {
+  draggable.addEventListener("dragstart", () => {
+    draggable.classList.add("dragging");
+  });
+
+  draggable.addEventListener("dragend", () => {
+    draggable.classList.remove("dragging");
+  });
+});
+
+containers.forEach(container => {
+  container.addEventListener("dragover", e => {
+    e.preventDefault();
+    const draggable = document.querySelector(".dragging");
+    container.appendChild(draggable);
+  });
+});
+  </script>
+</body>
+</html>

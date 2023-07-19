@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="card-group container">
+    <div class="card">
+      <!-- <img src="https://via.placeholder.com/600"> -->
+      <div class="card-body">
+        <h5 class="pt">one</h5>
+        <p id="zerop">가격 : 70000</p>
+        <button class="btn btn-danger">주문하기</button>
+        <button class="buy">구매</button>
+      </div>
+    </div>
+    <div class="card">
+      <!-- <img src="https://via.placeholder.com/600"> -->
+      <div class="card-body">
+        <h5 class="pt">two</h5>
+        <p id="onep">가격 : 70000</p>
+        <button class="btn btn-danger">주문하기</button>
+        <button class="buy">구매</button>
+      </div>
+    </div>
+    <div class="card">
+      <!-- <img src="https://via.placeholder.com/600"> -->
+      <div class="card-body">
+        <h5 class="pt">three</h5>
+        <p id="twop">가격 : 70000</p>
+        <button class="btn btn-danger">주문하기</button>
+        <button class="buy">구매</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    $('.buy').click(function(e){
+  var title = $(e.target).siblings('.pt').text();
+  if (localStorage.getItem('cart') != null ){
+    var list = JSON.parse(localStorage.cart);
+    list.push(title);
+    localStorage.setItem('cart', JSON.stringify(list));
+  } else {
+    localStorage.setItem('cart', JSON.stringify([title]))
+  }
+  });
+  $(document).ready(function() {
+      // 로컬 스토리지에서 저장된 항목 불러오기
+      var storedItems = localStorage.getItem('cart');
+      if (storedItems !== null) {
+        var cartItems = JSON.parse(storedItems);
+        console.log(cartItems); // 로그에 불러온 항목 출력 (개발자 도구에서 확인 가능)
+      } else {
+        cartItems = [];
+      }
+
+      // 중복 제거된 항목 다시 로컬 스토리지에 저장
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+
+      $('.buy').click(function(event) {
+        var title = $(this).siblings('h5').text();
+        var itemIndex = -1;
+
+        // 이미 해당 상품이 카트에 있는지 확인
+        for (var i = 0; i < cartItems.length; i++) {
+          if (cartItems[i].title === title) {
+            itemIndex = i;
+            break;
+          }
+        }
+
+        if (itemIndex !== -1) {
+          // 이미 카트에 있는 상품인 경우 개수 증가
+          cartItems[itemIndex].num++;
+        } else {
+          // 카트에 없는 상품인 경우 새로 추가
+          cartItems.push({ title: title, num: 1 });
+        }
+
+        // 카트 정보 다시 로컬 스토리지에 저장
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+      });
+    });
+  </script>
+</body>
+</html>

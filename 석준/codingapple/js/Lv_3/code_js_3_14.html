@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="select">
+    <h4>숫자</h4>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+  </div>
+  <script>
+    document.querySelector('#quiz').addEventListener('click', function(e){
+      switch(e.target.innerHTML){
+        case '1':
+          alert('one');
+          break;
+        case '2':
+          alert('two');
+          break;
+        case '3':
+          alert('three');
+          break;
+      }
+    });
+  </script>
+</body>
+</html>

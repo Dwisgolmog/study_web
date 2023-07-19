@@ -1,0 +1,22 @@
+{
+  "name": "study_web",
+  "version": "1.0.0",
+  "description": "웹 공부를 한것을 기록함과 동시에 깃허브 사용법을 익히기 위한 레파지토리",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnwn1211/study_web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dnwn1211/study_web/issues"
+  },
+  "homepage": "https://github.com/dnwn1211/study_web#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
