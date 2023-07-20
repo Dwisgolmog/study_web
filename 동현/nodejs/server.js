@@ -7,6 +7,11 @@ const MongoClient = require('mongodb').MongoClient;
 const crypto = require('crypto')
 require('dotenv').config();
 
+//소캣 셋팅
+const http = require('http').createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(http);
+
 //objectId로 형변환 하기 위한 자료형
 const { ObjectId } = require('mongodb');
 
@@ -27,7 +32,7 @@ MongoClient.connect(process.env.DB_URL, { useUnifiedTopology: true }, function (
 
     db = client.db('todoapp');
 
-    app.listen(process.env.PORT, function () {
+    http.listen(process.env.PORT, function () {
         console.log('listening on 8080')
     })
 
@@ -260,6 +265,8 @@ app.get('/chatting/:id',loginCheck,(req,res)=>{
     }) 
 })
 
+//last get
+
 // app.use -->전역 미들웨어 (모든 요청과 응답사이에 발생함) 
 // /shop 으로 접속을 요청하면 shop.js 라우터를 사용하겠다
 app.use('/shop',loginCheck,require('./routes/shop.js'));
@@ -392,4 +399,30 @@ app.post('/sendMessage',(req,res) =>{
         if (e) console.log('error chat!!');
     })
     res.redirect(`/chatting/${postId}`);
+})
+
+app.get('/socket',function(req,res){
+    res.render('socket.ejs');
+})
+
+
+//웹소캣으로 서버에 연결했을때 실행
+io.on('connection',function(socket){
+    //user-send라는 이름으로 보낸 통신 받기
+    socket.on('user-send',function(data){
+        //서버에서 유저로 브로드캐스팅 방식으로 보냄
+        io.emit('broadcast',data);
+        //io.to(socket.id).emit('broadcast',data); ==> 해당 유저에게만 데이터를 보냄
+    })
+
+    //roomChat이라는 이름으로 통신을 받았을때 룸채팅 유저만 채팅을 보내줌
+    socket.on('roomChat',function(data){
+        io.to('room1').emit('broadcast',data);
+    })
+
+    //joinRoom1라는 이름으로 통신을 받았을때
+    //유저를 room1으로 join 시킴
+    socket.on('joinRoom1',function(data){
+        socket.join('room1');
+    })
 })
