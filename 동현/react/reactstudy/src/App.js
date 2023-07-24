@@ -15,11 +15,15 @@ function App() {
       setTitle(copyTitle);
   }
 
+  function sortTitle(){
+    const copyTitle = [...title];
+    setTitle(copyTitle.sort());
+  }
   return (
-    
+  
     <div className="App">
       <div className='black-nav'>
-        <h4>Blog <span onClick={modifyTitle}>ChangeWomen</span></h4>
+        <h4>Blog <span onClick={modifyTitle}>ChangeWomen</span> <span onClick={sortTitle}>sort Title</span></h4>
       </div>
 
       {title.map((e, index) =>
@@ -27,7 +31,13 @@ function App() {
           <h4>{e} <span onClick={() => { setGood(good[index] + 1) }}>👍</span> {good[index]}</h4>
           <p>Date</p>
         </div>
-      )}      
+      )}
+
+      <div className='modal'>
+        <h4>title</h4>
+        <p>Date</p>
+        <p>content</p>
+      </div>      
     </div>
   );
 }
