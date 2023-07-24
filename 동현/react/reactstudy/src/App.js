@@ -32,13 +32,19 @@ function App() {
           <p>Date</p>
         </div>
       )}
-
-      <div className='modal'>
-        <h4>title</h4>
-        <p>Date</p>
-        <p>content</p>
-      </div>      
+     
+      <Modal></Modal>
     </div>
+  );
+}
+
+function Modal(){
+  return(
+    <div className='modal'>
+      <h4>title</h4>
+      <p>Date</p>
+      <p>content</p>
+    </div> 
   );
 }
 
