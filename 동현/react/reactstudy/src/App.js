@@ -20,6 +20,12 @@ function App() {
     const copyTitle = [...title];
     setTitle(copyTitle.sort());
   }
+
+  function up(index){
+    const copyGood = [...good];
+    copyGood[index] = copyGood[index] + 1;
+    setGood(copyGood); 
+  }
   return (
   
     <div className="App">
@@ -30,7 +36,7 @@ function App() {
 
       {title.map((e, index) =>
         <div className='list' key={index}>
-          <h4>{e} <span onClick={() => { setGood(good[index] + 1) }}>👍</span> {good[index]}</h4>
+          <h4>{e} <span onClick={()=>{up(parseInt(index))}}>👍</span> {good[index]}</h4>
           <p>Date</p>
         </div>
       )}
