@@ -8,6 +8,7 @@ function App() {
   const name = ['man shirt','study react','mapleStory']
   let [title,setTitle] = useState(name);
   let [good,setGood] = useState([0,1,2]);
+  const [modal,setModal] = useState(false);
 
   function modifyTitle(){
       const copyTitle = [...title];
@@ -25,6 +26,7 @@ function App() {
       <div className='black-nav'>
         <h4>Blog <span onClick={modifyTitle}>ChangeWomen</span> <span onClick={sortTitle}>sort Title</span></h4>
       </div>
+      <button onClick={()=>{modal==false ? setModal(true) : setModal(false)}}>Modal</button>
 
       {title.map((e, index) =>
         <div className='list' key={index}>
@@ -33,7 +35,10 @@ function App() {
         </div>
       )}
      
-      <Modal></Modal>
+      {
+        modal == true ? <Modal></Modal> : null
+      }
+      
     </div>
   );
 }
