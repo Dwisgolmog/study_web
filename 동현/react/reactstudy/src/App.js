@@ -9,6 +9,7 @@ function App() {
   let [title,setTitle] = useState(name);
   let [good,setGood] = useState([0,1,2]);
   const [modal,setModal] = useState(false);
+  const [titleNumber,setTitleNumber] = useState(0);
 
   function modifyTitle(){
       const copyTitle = [...title];
@@ -32,17 +33,18 @@ function App() {
       <div className='black-nav'>
         <h4>Blog <span onClick={sortTitle}>sort Title</span></h4>
       </div>
-      <button onClick={()=>{modal==false ? setModal(true) : setModal(false)}}>Modal</button>
 
       {title.map((e, index) =>
         <div className='list' key={index}>
-          <h4>{e} <span onClick={()=>{up(parseInt(index))}}>👍</span> {good[index]}</h4>
+          <h4 onClick={()=>{modal==false ? setModal(true) : setModal(false); setTitleNumber(index)}}>{e} 
+            <span onClick={()=>{up(parseInt(index))}}>👍</span> {good[index]}
+          </h4>
           <p>Date</p>
         </div>
       )}
      
       {
-        modal == true ? <Modal modifyTitle={modifyTitle} title={title}></Modal> : null
+        modal == true ? <Modal modifyTitle={modifyTitle} title={title} index={titleNumber}></Modal> : null
       }
       
     </div>
@@ -50,9 +52,10 @@ function App() {
 }
 
 function Modal(props){
+  console.log(props);
   return(
     <div className='modal'>
-      <h4>{props.title[0]}</h4>
+      <h4>{props.title[props.index]}</h4>
       <p>Date</p>
       <p>content</p>
       <button onClick={props.modifyTitle}>ChangeWomen</button>
