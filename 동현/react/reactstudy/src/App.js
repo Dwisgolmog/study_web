@@ -30,7 +30,7 @@ function App() {
   
     <div className="App">
       <div className='black-nav'>
-        <h4>Blog <span onClick={modifyTitle}>ChangeWomen</span> <span onClick={sortTitle}>sort Title</span></h4>
+        <h4>Blog <span onClick={sortTitle}>sort Title</span></h4>
       </div>
       <button onClick={()=>{modal==false ? setModal(true) : setModal(false)}}>Modal</button>
 
@@ -42,19 +42,20 @@ function App() {
       )}
      
       {
-        modal == true ? <Modal></Modal> : null
+        modal == true ? <Modal modifyTitle={modifyTitle} title={title}></Modal> : null
       }
       
     </div>
   );
 }
 
-function Modal(){
+function Modal(props){
   return(
     <div className='modal'>
-      <h4>title</h4>
+      <h4>{props.title[0]}</h4>
       <p>Date</p>
       <p>content</p>
+      <button onClick={props.modifyTitle}>ChangeWomen</button>
     </div> 
   );
 }
