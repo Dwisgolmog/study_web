@@ -52,7 +52,7 @@ function App() {
           <h4 onClick={()=>{modal==false ? setModal(true) : setModal(false); setTitleNumber(index)}}>{e} 
             <span onClick={(e)=>{e.stopPropagation(); up(index)}}>👍</span> {good[index]}
           </h4>
-          <p>Date</p>
+          <p>{new Date()}</p>
           <p><button onClick={(e)=>{e.stopPropagation(); deleteCon(index)}}>Delete</button></p>
         </div>
       )}
@@ -60,10 +60,10 @@ function App() {
 
       <input onChange={(e) => setAddTitle(e.target.value)} /><button onClick={() => {
         const copyTitle = [...title];
-        copyTitle.push(addTitle);
+        copyTitle.unshift(addTitle);
         setTitle(copyTitle);
 
-        good.push(parseInt(0));
+        good.unshift(parseInt(0));
         setGood(good);
 
       }}>submit</button>
