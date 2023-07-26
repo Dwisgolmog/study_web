@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const {ObjectId}= require('mongodb');
 const path = require('path');
 
+const http = require('http').createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(http);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
@@ -30,10 +34,34 @@ MongoClient.connect('mongodb+srv://admin:sksl3296@cluster0.yku7bkv.mongodb.net/?
 
 
   // 포트번호, 실행할 코드
-  app.listen(8080, function () {
+  http.listen(8080, function () {
     console.log('listening on 8080');
   });
 });
+
+app.get('/socket', function(요청, 응답){
+  응답.render('socket.ejs')
+})
+
+io.on('connection',function(socket){
+  console.log('유저 접속함')
+  socket.on('room1-send',function(data){
+    io.to('room1').emit('broadcast',data)
+  })
+
+  socket.on('joinroom',function(data){
+    socket.join('room1');
+  })
+
+  socket.on('user-send',function(data){
+    console.log(data)
+
+  
+    io.emit('broadcast',data)//단체
+    //io.to(socket.id).emit('broadcast',data) // 서버<-> 개인
+  })
+  
+})
 
 
 app.get('/pet', function(요청, 응답){
@@ -143,8 +171,8 @@ function logintrue(요청, 응답, next){
 app.post('/chatroom', logintrue, function(요청, 응답){
 
   var saveData ={
-    title : 'chatroom',
-    member: [ObjectId(요청.body.당한사람),요청.user._id],
+    title : 'chatroom123',
+    member: [요청.body.당한사람id,요청.user._id],
     date : new Date()
   }
 
@@ -162,7 +190,7 @@ app.get('/chat', logintrue, function(요청, 응답){
 
 });
 
-app.post('/message', 로그인했니, function(요청, 응답){
+app.post('/message', logintrue, function(요청, 응답){
 
   var save={
     parent : 요청.body.parent,
@@ -171,11 +199,36 @@ app.post('/message', 로그인했니, function(요청, 응답){
     date : new Date(),
   }
 
-  db.collection('message').insertOne().then(()=>{
+  db.collection('message').insertOne(save).then(()=>{
     console.log('db저장성공')
     응답.send('db 저장성공')
   })
 })
+
+app.get('/message/:parentid', logintrue, function(요청, 응답){
+
+  응답.writeHead(200, {
+    "Connection": "keep-alive",
+    "Content-Type": "text/event-stream",
+    "Cache-Control": "no-cache",
+  });
+
+  db.collection('message').find({parent : 요청.params.id}).toArray()
+  .then((결과)=>{
+    응답.write('event: test\n');
+    응답.write('data: '+JSON.stringify(결과)+'\n\n');
+  })
+  const pipeline=[
+    {$match:{ 'fullDocument.parent' : 요청. params.id}}
+  ];
+  const collection =db.collection('message');
+  const changeStream = collection.watch(pipeline);
+  changeStream.on('change',(result)=>{
+    console.log(result.fullDocument)
+    응답.write('event: test\n');
+    응답.write('data: '+JSON.stringify(result.fullDocument)+'\n\n');
+  })
+});
 
 //인증하는방법을 Strategy
 passport.use(new LocalStrategy({
@@ -297,7 +350,25 @@ app.get('/image/:imageName',function(요청, 응답){
   응답.sendFile( __dirname+'/public/image/'+요청.params.imageName)
 })
 
+// <!-- 요청은 4개 방식이 있음-->
+// <!-- 1. 읽기 Get -->
+// <!-- 2. 쓰기 Post -->
+// <!-- 3. 수정 Put -->
+// <!-- 4. 삭제 Delete -->
 
+// <!-- 어떤사람이 /list 라는 페이지를 GET요청하면 거기 해당하는 list.html파일을 보내줌 -->
+// <!-- node.js를 이용해서 javascript로 문법  -->
+
+// <!-- html 웹페이지에 그림 글 쓰는거 가능 -->
+// <!-- javaScript 웹페이지를 다이나믹하게 바꿔줌 -->
+// <!-- javaScript 해석은 브라우저가 함(크롭 앳지 등) -->
+// <!-- 크롬 v8 -->
+// <!-- 파이어폭스 spidermonkey -->
+// <!-- node.js v8 실행환경-->
+// /////////////////////////////////
+
+// <!-- node.js 특징 -->
+// <!-- 빠른거 먼저함 Non-blocking i/o -->
 
 // app.get('/add', function(요청, 응답){
 //   응답.send('전송완료')

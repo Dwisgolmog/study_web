@@ -7,12 +7,27 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+    rel="stylesheet"
+    />
     <title>Hello, world!</title>
   </head>
   <body>
-
-
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+    
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
@@ -27,41 +42,145 @@
     <%-include('nav.html')%>
 
 
-    <div class="container mt-4">
-      <h4 class="text-center"> 채팅방 </h4>
-      <div class="row">
-        <div class="col-3">
-          <ul class="list-group chat-list">
-
-            <% for (var i=0; i < data.length ; i++){ %>
-              <li class="list-group-item" data-id="<%= data[i]._id %>">
-                <h6> <%= data[i].title %> </h6>     
-                <h6 class="text-small"> <%= data[i].member[0] %> </h6>
-              </li>
-            <% } %>
-              <li class="list-group-item">
-                <h6>채팅방1</h6>
-                <h6 class="text-small">채팅방아이디</h6>
-              </li>
-            </ul>
-            <div class="col-9 p-0">
-              <div class="chat-room">
-                <ul class="list-group chat-content">
-                  <li><span class="chat-box">내용1</span></li>
-                  <li><span class="chat-box">내용1</span></li>
-                  <li><span class="chat-mine">내용1</span></li>
-                </ul>
-                <div class="input-group">
-                  <input type="chat-input" class="form-control">
-                  <button class="btn btn-secondary" id="send">전송</button>
+    <section style="background-color: #CDC4F9;">
+      <div class="container py-5">
+    
+        <div class="row">
+          <div class="col-md-12">
+    
+            <div class="card" id="chat3" style="border-radius: 15px;">
+              <div class="card-body">
+    
+                <div class="row">
+                  <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+    
+                    <div class="p-3">
+    
+                      <div class="input-group rounded mb-3">
+                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                          aria-describedby="search-addon" />
+                        <span class="input-group-text border-0" id="search-addon">
+                          <i class="fas fa-search"></i>
+                        </span>
+                      </div>
+    
+                      <div data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+                        <ul class="list-unstyled mb-0">
+                          <% for (var i=0; i < data.length ; i++){ %>
+                            <li class="list-group-item" data-id="<%= data[i]._id %>">
+                            <a href="#!" class="d-flex justify-content-between">
+                              <div class="d-flex flex-row">
+                                <div>
+                                  <img
+                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                    alt="avatar" class="d-flex align-self-center me-3" width="60">
+                                  <span class="badge bg-success badge-dot"></span>
+                                </div>
+                                <div class="pt-1">
+                                  <h6> <%= data[i].title %> <%= data[i]._id%> </h6>     
+                                  <h6 class="text-small"> <%= data[i].member[0] %> </h6>
+                                </div>
+                              </div>
+                              <div class="pt-1">
+                                <p class="small text-muted mb-1">Just now</p>
+                                <span class="badge bg-danger rounded-pill float-end">3</span>
+                              </div>
+                            </a>
+                          </li>
+                          <% } %>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-lg-7 col-xl-8">
+                    <div class="pt-3 pe-3" data-mdb-perfect-scrollbar="true"
+                      style="position: relative; height: 400px">
+                      <div class="d-flex flex-row justify-content-start">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                          alt="avatar 1" style="width: 45px; height: 100%;">
+                        <div>
+                          <p class="small p-2 ms-3 mb-1 rounded-3 chat-content" style="background-color: #f5f6f7;">Lorem ipsum
+                            dolor
+                            sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore
+                            magna aliqua.
+                          </p>
+                          <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row justify-content-end">
+                        <div>
+                          <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Ut enim ad minim veniam,
+                            quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                          <p class="small me-3 mb-3 rounded-3 text-muted">12:00 PM | Aug 13</p>
+                        </div>
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                          alt="avatar 1" style="width: 45px; height: 100%;">
+                      </div>
+                      <div class="d-flex flex-row justify-content-start">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                          alt="avatar 1" style="width: 45px; height: 100%;">
+                        <div>
+                          <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Duis aute
+                            irure
+                            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                          </p>
+                          <p class="small ms-3 mb-3 rounded-3 text-muted float-end">12:00 PM | Aug 13</p>
+                        </div>
+                      </div>    
+                    </div>
+                    <div class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
+                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                        alt="avatar 3" style="width: 40px; height: 100%;">
+                      <input type="text" class="form-control form-control-lg" id="exampleFormControlInput2"
+                        placeholder="Type message">
+                      
+                      <button class ="btn btn-secondary" id="send">전송</button>
+                    </div>
+    
+                  </div>
                 </div>
+    
               </div>
             </div>
+    
           </div>
         </div>
-      </div>
-      
     
+      </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+      var nowChatId;
+      var eventSource;
+      $('.list-group-item').click(function(){
+        nowChatId = this.dataset.id;
+        $('.chat-content').html('');
+        //나가기
+        if(eventSource !=undefined){
+          eventSource.close()
+        }
+
+        eventSource = new EventSource('/message/'+nowChatId);
+        eventSource.addEventListener('test',function(e){
+          var messageData =JSON.parse(e.data);
+          messageData.forEach(function(i){
+            $('.chat-content').append('<li><span class="chat-box">'+i.content+'</span></li>')
+          })
+        })
+      })
+      $('#send').click(function(){
+        var chatData = $('#exampleFormControlInput2').val();
+        var sendData ={
+          parent : nowChatId,
+          content : chatData,
+        }
+        $.post('/message',sendData).then(()=>{
+          console.log('전송완료')
+        })
+      })
+    </script>
   </body>
 </html>
 
