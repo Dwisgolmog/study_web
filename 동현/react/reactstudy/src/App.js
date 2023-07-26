@@ -52,7 +52,7 @@ function App() {
           <h4 onClick={()=>{modal==false ? setModal(true) : setModal(false); setTitleNumber(index)}}>{e} 
             <span onClick={(e)=>{e.stopPropagation(); up(index)}}>👍</span> {good[index]}
           </h4>
-          <p>{new Date()}</p>
+          <p>Date</p>
           <p><button onClick={(e)=>{e.stopPropagation(); deleteCon(index)}}>Delete</button></p>
         </div>
       )}
