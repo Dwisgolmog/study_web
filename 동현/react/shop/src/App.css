@@ -9,3 +9,14 @@ body{
 .Handjet{
     font-family: 'Handjet', cursive;
 }
+.main-bg{
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+.item{
+    text-align: center;
+}
+.item img{
+    width: 100%;
+}
