@@ -3,6 +3,8 @@ import { AppBar,Box, Toolbar,Typography,Tabs,Tab } from "@mui/material";
 import AdbIcon from '@mui/icons-material/Adb';
 import {ThemeProvider,createTheme} from "@mui/material";
 import '../App.css';
+import {Link} from 'react-router-dom';
+
 
 const darkTheme = createTheme({
     palette: {
@@ -51,9 +53,10 @@ function NavBar() {
                                     fontSize: '1.2rem',
                                 },
                             }} value={value} onChange={handleChange} textColor="inherit">
-                                <Tab label="Item One" />
-                                <Tab label="Item Two" />
-                                <Tab label="Item Three" />
+                                <Tab label="HomePage" component={Link} to="/" />
+
+                                <Tab label="Detail" component={Link} to="/detail" />
+                                {/* <Tab label="Item Three" /> */}
                             </Tabs>
                         </Box>
 
