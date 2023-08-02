@@ -3,7 +3,7 @@ import { AppBar,Box, Toolbar,Typography,Tabs,Tab } from "@mui/material";
 import AdbIcon from '@mui/icons-material/Adb';
 import {ThemeProvider,createTheme} from "@mui/material";
 import '../App.css';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 
 
 const darkTheme = createTheme({
@@ -21,6 +21,8 @@ const darkTheme = createTheme({
 
 function NavBar() {
     const [value, setValue] = useState(0);
+
+    let navigator = useNavigate();
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -53,9 +55,9 @@ function NavBar() {
                                     fontSize: '1.2rem',
                                 },
                             }} value={value} onChange={handleChange} textColor="inherit">
-                                <Tab label="HomePage" component={Link} to="/" />
+                                <Tab label="HomePage" onClick={()=>{navigator('/')}} />
 
-                                <Tab label="Detail" component={Link} to="/detail" />
+                                <Tab label="Detail" onClick={()=>{navigator('/detail')}} />
                                 {/* <Tab label="Item Three" /> */}
                             </Tabs>
                         </Box>
