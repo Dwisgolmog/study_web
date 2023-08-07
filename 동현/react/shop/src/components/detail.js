@@ -3,13 +3,6 @@ import { Container } from '@mui/system';
 import { Grid,Button } from '@mui/material';
 import '../App.css'
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components'; 
-
-const YellowBtn = styled.button`
-    background : ${props => props.bg};
-    color : black;
-    padding : 10px;
-`;
 
 function Detail(props) {
     let {id} = useParams();
@@ -19,7 +12,6 @@ function Detail(props) {
 
     return (
         <div className='detail'>
-            <YellowBtn bg='yellow'>button</YellowBtn>    
             <img src={`https://codingapple1.github.io/shop/shoes${imageId}.jpg`} style={{ width: '70%' }}/>
             <Container>
                 <Grid container className='item'>

@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@mui/material": "^5.14.2",
-    "styled-components": "^6.0.7"
+    "@mui/material": "^5.14.2"
   }
 }
