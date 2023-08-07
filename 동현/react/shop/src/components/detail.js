@@ -3,6 +3,9 @@ import { Container } from '@mui/system';
 import { Grid,Button } from '@mui/material';
 import '../App.css'
 import { useParams } from 'react-router-dom';
+import { useState,useEffect } from 'react';
+import {Alert} from '@mui/material';
+
 
 function Detail(props) {
     let {id} = useParams();
@@ -10,8 +13,16 @@ function Detail(props) {
 
     let product = props.shoes.find(item => item.id == id);
 
+    let [dis,setDis] = useState('');
+    useEffect(()=>{
+        setTimeout(()=>{
+            setDis(dis='none');
+        },2000);
+    })
+
     return (
         <div className='detail'>
+            <Alert style={{display: dis}} variant="outlined" severity="info">2초후에 해당 창이 사라집니다.</Alert>
             <img src={`https://codingapple1.github.io/shop/shoes${imageId}.jpg`} style={{ width: '70%' }}/>
             <Container>
                 <Grid container className='item'>
