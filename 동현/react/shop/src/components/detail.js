@@ -22,9 +22,7 @@ function Detail(props) {
         setTimeout(()=>{ 
             setAlert(false);
         },2000);
-        console.log('mount');
         return()=>{
-            console.log('unmount');
         }
     },[])
 
