@@ -8,8 +8,11 @@ import axios from 'axios';
 
 function HomePage() {
     const [shoes] = useState(data);
-    const [moreShoes,setMoreShoes] = useState();
+    const [moreShoes,setMoreShoes] = useState(null);
     const [bool,setBool] = useState(false);
+    const [num,setNum] = useState(2);
+    const [loding,setLoding] = useState(false);
+    // const [lodingUi,setlodingUi] = useState(false);
 
     return (
         <>
@@ -31,16 +34,32 @@ function HomePage() {
                     )}
                 </Grid>
                 <Grid container justifyContent='center'>
-                    <Button onClick={()=>{
-                        axios.get('https://codingapple1.github.io/shop/data2.json')
-                        .then((result)=>{
-                            setMoreShoes(result.data);
-                            setBool(true);
-                        })
-                        .catch(()=>{
-                            console.log('통신 실패');
-                        })
-                    }} variant='outlined' sx={{m:2}}>더보기</Button>
+                    {loding && (<div>로딩중</div>)}
+                    {   
+                        num < 4 ? 
+                        <Button onClick={()=>{
+                            setLoding(true);
+                            axios.get(`https://codingapple1.github.io/shop/data${num}.json`)
+                            .then((result)=>{
+                                if(moreShoes == null){
+                                    setMoreShoes(result.data);
+                                }else{
+                                    let copy = [...moreShoes,...result.data];
+                                    setMoreShoes(copy);
+                                }
+                                setBool(true);
+                                setNum(num+1);
+                                setLoding(false);
+                            })
+                            .catch(()=>{
+                                console.log('통신 실패');
+                                setLoding(false);
+                                
+                            })
+                        }} variant='outlined' sx={{m:2}}>더보기</Button>
+                        : null
+                    }
+
                 </Grid>
             </Container>
         </>
