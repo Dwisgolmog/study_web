@@ -5,6 +5,7 @@ import { Container } from '@mui/system';
 import data from '../data';
 import ProductCard from './product';
 import axios from 'axios';
+import {CircularProgress} from '@mui/material';
 
 function HomePage() {
     const [shoes] = useState(data);
@@ -34,7 +35,7 @@ function HomePage() {
                     )}
                 </Grid>
                 <Grid container justifyContent='center'>
-                    {loding && (<div>로딩중</div>)}
+                    {loding && (<CircularProgress />)}
                     {   
                         num < 4 ? 
                         <Button onClick={()=>{
