@@ -1,10 +1,11 @@
 import React from 'react'
 import { Container } from '@mui/system';
-import { Grid,Button } from '@mui/material';
+import { Grid,Button, Grow } from '@mui/material';
 import '../App.css'
 import { useParams } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import {Alert} from '@mui/material';
+import {TextField} from '@mui/material';
 
 
 function Detail(props) {
@@ -13,20 +14,50 @@ function Detail(props) {
 
     let product = props.shoes.find(item => item.id == id);
 
-    let [dis,setDis] = useState('');
+    let [alert,setAlert] = useState(true);
+    const [inputValue,setInputValue] = useState();
+    const [showAlert,setShowAlert] = useState(false);
+
     useEffect(()=>{
-        setTimeout(()=>{
-            setDis(dis='none');
+        setTimeout(()=>{ 
+            setAlert(false);
         },2000);
-    })
+        console.log('mount');
+        return()=>{
+            console.log('unmount');
+        }
+    },[])
+
+    useEffect(()=>{
+        if(inputValue == null || inputValue == ''){
+            setShowAlert(false);
+        }else{
+            if(isNaN(inputValue)){
+                setShowAlert(true);
+            }else{
+                setShowAlert(false);
+            }
+        }
+    },[inputValue])
+
+    //input값 변수에 저장
+    const onChangeInput = (e) =>{setInputValue(e.target.value)}
 
     return (
         <div className='detail'>
-            <Alert style={{display: dis}} variant="outlined" severity="info">2초후에 해당 창이 사라집니다.</Alert>
+            {
+                alert == true ? <Alert variant="outlined" severity="info">2초후에 해당 창이 사라집니다.</Alert>
+                : null
+            }
+            
             <img src={`https://codingapple1.github.io/shop/shoes${imageId}.jpg`} style={{ width: '70%' }}/>
             <Container>
                 <Grid container className='item'>
                     <Grid item xs={12}>
+                        
+                        <Grow in={showAlert} timeout={2000}><Alert sx={{m:2}} variant="filled" severity="error">경고:숫자만 입력해주세요</Alert></Grow>
+                        
+                        <TextField label="수량" variant="outlined" onChange={onChangeInput} />
                         <h4 className="pt-5">{product.title}</h4>
                         <p>{product.content}</p>
                         <p>{product.price}</p>
