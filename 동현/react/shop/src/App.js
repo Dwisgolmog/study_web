@@ -6,9 +6,12 @@ import HomePage from './components/HomePage';
 import Detail from './components/detail';
 import Event from './Page/Event';
 import data from './data';
+import './App.css';
 
 function App() {
   const [shoes] = useState(data);
+
+
 
   return (
     <>

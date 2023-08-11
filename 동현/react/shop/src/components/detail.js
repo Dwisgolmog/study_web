@@ -19,12 +19,16 @@ function Detail(props) {
     const [inputValue,setInputValue] = useState();
     const [showAlert,setShowAlert] = useState(false);
     const [tabValue,setTabValue] = useState(0);
+    const [pageEnd,setPagaEnd] = useState('detailEnd');
 
     useEffect(()=>{
+        let a = setTimeout(()=>{setPagaEnd('detailEnd')},100)
         setTimeout(()=>{ 
             setAlert(false);
-        },2000);
+        },3000);
         return()=>{
+            clearTimeout(a);
+            setPagaEnd('');
         }
     },[])
 
@@ -40,14 +44,16 @@ function Detail(props) {
         }
     },[inputValue])
 
+
+
     //input값 변수에 저장
     const onChangeInput = (e) =>{setInputValue(e.target.value)}
 
     return (
-        <div className='detail'>
+        <div className={`detail detailStart ${pageEnd}`}>
             {
-                alert == true ? <Alert variant="outlined" severity="info">2초후에 해당 창이 사라집니다.</Alert>
-                : null
+                alert == true ? <Grow in={alert} timeout={1000}><Alert variant="outlined" severity="info">3초후에 해당 창이 사라집니다.</Alert></Grow>
+                : <Grow in={alert} timeout={1000}><Alert variant="outlined" severity="info">3초후에 해당 창이 사라집니다.</Alert></Grow>
             }
             
             <Container>
@@ -82,8 +88,24 @@ function Detail(props) {
     );
 }
 
+//애니메이션이 매끄럽게 작동하지 않음 수정바람
 function TabPanel({value}){
-    return [<div>첫번째</div>,<div>두번째</div>,<div>세번째</div>][value];
+    const [bool,setBool] = useState('detailEnd');
+
+    useEffect(()=>{
+        let a = setInterval(()=>{setBool('detailEnd')},100);
+        return ()=>{
+            setBool('');
+        }
+    },[value])
+
+    return (
+        <div className={`detailStart ${bool}`}>
+            {[<div>첫번째</div>,<div>두번째</div>,<div>세번째</div>][value]}
+        </div>
+        
+        
+    )
 }
 
 export default Detail

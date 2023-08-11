@@ -23,3 +23,10 @@ body{
 .detail{
     text-align: center;
 }
+.detailStart{
+    opacity: 0;
+}
+.detailEnd{
+    opacity: 1;
+    transition: opacity 3s;
+}
