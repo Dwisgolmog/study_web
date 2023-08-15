@@ -82,14 +82,13 @@ function Detail(props) {
                     </Tabs>
                 </Grid>
                 <hr style={{marginTop : '-0.1vw'}} />
-                <TabPanel value={tabValue}/>
+                <TabPanel value={tabValue} shoes={props.shoes}/>
             </Container>
         </div>
     );
 }
 
-//애니메이션이 매끄럽게 작동하지 않음 수정바람
-function TabPanel({value}){
+function TabPanel({value,shoes}){
     const [bool,setBool] = useState('detailEnd');
 
     useEffect(()=>{
@@ -101,7 +100,7 @@ function TabPanel({value}){
 
     return (
         <div className={`detailStart ${bool}`}>
-            {[<div>첫번째</div>,<div>두번째</div>,<div>세번째</div>][value]}
+            {[<div>{shoes[0].title}</div>,<div>두번째</div>,<div>세번째</div>][value]}
         </div>
         
         
