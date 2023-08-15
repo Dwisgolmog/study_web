@@ -1,8 +1,10 @@
 import { TableCell,TableHead,Table,TableBody,TableContainer,Paper,TableRow } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { upCount } from "../store/cart";
 
 function Cart() {
     let state = useSelector((state)=> state.cart)
+    let dispatch = useDispatch();
 
     return (
         <>
@@ -18,16 +20,14 @@ function Cart() {
                     </TableHead>
                     <TableBody>
                         {
-                            state.map((item,product)=>{
-                                return(
-                                    <TableRow key={product}>
-                                        <TableCell component="th" scope="row">{item.id}</TableCell>
-                                        <TableCell align="left">{item.name}</TableCell>
-                                        <TableCell align="left">{item.count}</TableCell>
-                                        <TableCell align="left">안녕</TableCell>
-                                    </TableRow>
-                                );
-                            })
+                            state.map((item, index) => ( 
+                                <TableRow key={index}>
+                                    <TableCell component="th" scope="row">{item.id}</TableCell>
+                                    <TableCell align="left">{item.name}</TableCell>
+                                    <TableCell align="left">{item.count}</TableCell>
+                                    <TableCell align="left"><button onClick={()=>{dispatch(upCount(item.id))}}>+</button></TableCell>
+                                </TableRow>
+                            ))
                         }
                     </TableBody>
                 </Table>

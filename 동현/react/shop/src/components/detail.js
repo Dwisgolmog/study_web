@@ -7,9 +7,11 @@ import { useState,useEffect } from 'react';
 import {Alert} from '@mui/material';
 import {TextField} from '@mui/material';
 import {Tab,Tabs} from '@mui/material';
-
+import { useDispatch } from 'react-redux';
+import { inCart } from '../store/cart';
 
 function Detail(props) {
+    let dispatch = useDispatch();
     let {id} = useParams();
     let imageId = parseInt(id)+1;
 
@@ -68,7 +70,7 @@ function Detail(props) {
                                 <TextField sx={{height:'6vw',width:'18vw'}} label="수량" variant="outlined" onChange={onChangeInput} />
                             </Grid>
                             <Grid item xs={6}>
-                                <Button sx={{height:'6vw', width:'13vw'}} variant="outlined">주문하기</Button>
+                                <Button sx={{height:'6vw', width:'13vw'}} variant="outlined" onClick={()=>{dispatch(inCart(product))}}>주문하기</Button>
                             </Grid>
                         </Grid>
                         <Grow in={showAlert} timeout={2000}><Alert sx={{m:2}} variant="filled" severity="error">경고:숫자만 입력해주세요</Alert></Grow>

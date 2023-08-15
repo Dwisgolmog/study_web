@@ -57,7 +57,7 @@ function NavBar() {
                             }} value={value} onChange={handleChange} textColor="inherit">
                                 <Tab label="HomePage" onClick={()=>{navigator('/')}} />
 
-                                <Tab label="Detail" onClick={()=>{navigator('/detail')}} />
+                                <Tab label="Cart" onClick={()=>{navigator('/cart')}} />
                                 {/* <Tab label="Item Three" /> */}
                             </Tabs>
                         </Box>
