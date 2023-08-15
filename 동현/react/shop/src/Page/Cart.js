@@ -1,6 +1,9 @@
 import { TableCell,TableHead,Table,TableBody,TableContainer,Paper,TableRow } from "@mui/material";
+import { useSelector } from "react-redux";
 
 function Cart() {
+    let state = useSelector((state)=> state.cart)
+
     return (
         <>
             <TableContainer component={Paper}>
@@ -14,12 +17,18 @@ function Cart() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                            <TableRow>
-                                <TableCell component="th" scope="row">1</TableCell>
-                                <TableCell align="left">안녕</TableCell>
-                                <TableCell align="left">안녕</TableCell>
-                                <TableCell align="left">안녕</TableCell>
-                            </TableRow>
+                        {
+                            state.map((item,product)=>{
+                                return(
+                                    <TableRow key={product}>
+                                        <TableCell component="th" scope="row">{item.id}</TableCell>
+                                        <TableCell align="left">{item.name}</TableCell>
+                                        <TableCell align="left">{item.count}</TableCell>
+                                        <TableCell align="left">안녕</TableCell>
+                                    </TableRow>
+                                );
+                            })
+                        }
                     </TableBody>
                 </Table>
             </TableContainer>
