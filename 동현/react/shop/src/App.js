@@ -8,7 +8,7 @@ import Event from './Page/Event';
 import data from './data';
 import './App.css';
 import Cart from './Page/Cart';
-
+// 성능개선 하기!
 function App() {
   const [shoes] = useState(data);
 
