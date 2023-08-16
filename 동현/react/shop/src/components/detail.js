@@ -46,7 +46,15 @@ function Detail(props) {
         }
     },[inputValue])
 
-
+    useEffect(()=>{
+        let data = JSON.parse(localStorage.getItem('item'));
+        if(data.some(item=>item===id)){
+            console.log('상품번호 중복');
+        }else{
+            data.push(id);
+            localStorage.setItem('item',JSON.stringify(data));
+        }   
+    },[])
 
     //input값 변수에 저장
     const onChangeInput = (e) =>{setInputValue(e.target.value)}
@@ -54,7 +62,7 @@ function Detail(props) {
     return (
         <div className={`detail detailStart ${pageEnd}`}>
             {
-                alert == true ? <Grow in={alert} timeout={1000}><Alert variant="outlined" severity="info">3초후에 해당 창이 사라집니다.</Alert></Grow>
+                alert === true ? <Grow in={alert} timeout={1000}><Alert variant="outlined" severity="info">3초후에 해당 창이 사라집니다.</Alert></Grow>
                 : <Grow in={alert} timeout={1000}><Alert variant="outlined" severity="info">3초후에 해당 창이 사라집니다.</Alert></Grow>
             }
             

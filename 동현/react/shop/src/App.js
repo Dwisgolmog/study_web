@@ -1,7 +1,7 @@
-import {React,useState} from 'react';
+import {React,useState,useEffect} from 'react';
 import NavBar from './components/NavBar';
 import { Container } from '@mui/system';
-import {Routes, Route, UNSAFE_DataRouterStateContext} from 'react-router-dom';
+import {Routes, Route, UNSAFE_DataRouterStateContext, json} from 'react-router-dom';
 import HomePage from './components/HomePage';
 import Detail from './components/detail';
 import Event from './Page/Event';
@@ -12,7 +12,13 @@ import Cart from './Page/Cart';
 function App() {
   const [shoes] = useState(data);
 
-
+  useEffect(()=>{
+    let data = JSON.parse(localStorage.getItem('item'));  
+    if(data.length == 0){
+      localStorage.setItem('item',JSON.stringify([]));
+    }
+    
+  },[])
 
   return (
     <>
